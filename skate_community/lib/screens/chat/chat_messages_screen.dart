@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
 
@@ -178,14 +179,39 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat met ${widget.chatPartnerName}'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: Text(
+              'Chat met ${widget.chatPartnerName}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor:
+                Colors.transparent, // Transparant om de gradient te tonen
+            elevation: 0, // Geen schaduw
+            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
+          ),
+        ),
       ),
-      body: Column(
-        children: [
-          Expanded(child: _buildMessageList()),
-          _buildMessageInput(),
-        ],
+      body: BackgroundWrapper(
+        child: Column(
+          children: [
+            Expanded(child: _buildMessageList()),
+            _buildMessageInput(),
+          ],
+        ),
       ),
     );
   }

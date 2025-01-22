@@ -1,6 +1,10 @@
 // lib/screens/add_friend_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:skate_community/screens/widgets/add_friend_request_widget.dart';
+import 'package:skate_community/screens/widgets/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/search_bar_widget.dart';
+import 'package:skate_community/screens/widgets/search_results_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
 import 'package:skate_community/services/user_service.dart';
 
@@ -54,53 +58,52 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
 
   /// Zoekt gebruikers op basis van de zoekterm
   Future<void> _searchUsers() async {
-  final query = _searchController.text.trim();
-  if (query.isEmpty) {
+    final query = _searchController.text.trim();
+    if (query.isEmpty) {
+      setState(() {
+        _searchResults = [];
+      });
+      return;
+    }
+
     setState(() {
-      _searchResults = [];
+      _isLoading = true;
+      _error = null;
     });
-    return;
+
+    try {
+      // Zoek naar gebruikers op basis van de zoekterm
+      final results = await _userService.searchUsers(query);
+
+      // Haal de ID's van je vrienden op
+      final currentUser = await _userService
+          .getCurrentUser(); // Pas dit aan aan je methode voor user ID
+      final currentUserId = currentUser['id'];
+      final friends = await _friendsService.getFriends(); // Haal vrienden op
+      final friendIds = friends.map((friend) => friend['friend_id']).toSet();
+
+      // Filter jezelf en je vrienden uit de resultaten
+      final filteredResults = results.where((user) {
+        final userId = user['id'];
+        return userId != currentUserId && !friendIds.contains(userId);
+      }).toList();
+
+      setState(() {
+        _searchResults = filteredResults;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $_error')),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
-
-  setState(() {
-    _isLoading = true;
-    _error = null;
-  });
-
-  try {
-    // Zoek naar gebruikers op basis van de zoekterm
-    final results = await _userService.searchUsers(query);
-
-    // Haal de ID's van je vrienden op
-    final currentUser = await _userService.getCurrentUser(); // Pas dit aan aan je methode voor user ID
-    final currentUserId = currentUser['id'];
-    final friends = await _friendsService.getFriends(); // Haal vrienden op
-    final friendIds = friends.map((friend) => friend['friend_id']).toSet();
-
-    print(friendIds);
-
-    // Filter jezelf en je vrienden uit de resultaten
-    final filteredResults = results.where((user) {
-      final userId = user['id'];
-      return userId != currentUserId && !friendIds.contains(userId);
-    }).toList();
-
-    setState(() {
-      _searchResults = filteredResults;
-    });
-  } catch (e) {
-    setState(() {
-      _error = e.toString();
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error: $_error')),
-    );
-  } finally {
-    setState(() {
-      _isLoading = false;
-    });
-  }
-}
 
   /// Verzendt een vriendverzoek naar een gebruiker
   Future<void> _sendFriendRequest(String receiverId) async {
@@ -174,168 +177,64 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     }
   }
 
-  Widget _buildSearchResults() {
-    if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
-    } else if (_searchResults.isEmpty) {
-      return Center(
-        child: Text(
-          'Geen resultaten gevonden.',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
-        ),
-      );
-    } else {
-      return ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: _searchResults.length,
-        itemBuilder: (context, index) {
-          final user = _searchResults[index];
-          return Card(
-            elevation: 4,
-            margin: EdgeInsets.symmetric(vertical: 8),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.teal.shade200,
-                child: Icon(Icons.person, color: Colors.white),
-              ),
-              title: Text(
-                user['username'] ?? user['email'],
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              subtitle: Text(user['email']),
-              trailing: ElevatedButton(
-                onPressed: _isLoading ? null : () => _sendFriendRequest(user['id']),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                ),
-                child: Text('Toevoegen'),
-              ),
-            ),
-          );
-        },
-      );
-    }
-  }
-
-  Widget _buildFriendRequests() {
-    if (_friendRequests.isEmpty) {
-      return SizedBox.shrink();
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Inkomende Vriendverzoeken',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.teal),
-        ),
-        SizedBox(height: 10),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: _friendRequests.length,
-          itemBuilder: (context, index) {
-            final request = _friendRequests[index];
-            final sender = request['sender'];
-            return Card(
-              elevation: 3,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.orangeAccent,
-                  child: Icon(Icons.person, color: Colors.white),
-                ),
-                title: Text(
-                  sender['username'] ?? sender['email'],
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                subtitle: Text(sender['email']),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.check, color: Colors.green),
-                      onPressed: _isLoading
-                          ? null
-                          : () => _acceptFriendRequest(request['id'], sender['id']),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.close, color: Colors.red),
-                      onPressed: _isLoading ? null : () => _declineFriendRequest(request['id']),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 30),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Voeg Vrienden Toe'),
-        backgroundColor: Colors.teal,
-        elevation: 5,
-      ),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Zoek nieuwe vrienden',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.teal),
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _searchController,
-                            decoration: InputDecoration(
-                              hintText: 'Voer een gebruikersnaam in',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              prefixIcon: Icon(Icons.search, color: Colors.teal),
-                            ),
-                            onSubmitted: (_) => _searchUsers(),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        ElevatedButton(
-                          onPressed: _isLoading ? null : _searchUsers,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Text('Zoek'),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    _buildSearchResults(),
-                    SizedBox(height: 30),
-                    if (_friendRequests.isNotEmpty) _buildFriendRequests(),
-                  ],
-                ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: const Text(
+              'Voeg vrienden toe',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            backgroundColor: Colors.transparent,
+            elevation: 5,
+            iconTheme: const IconThemeData(color: Colors.white),
+          ),
+        ),
+      ),
+      body: BackgroundWrapper(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SearchBarWidget(
+                  controller: _searchController,
+                  isLoading: _isLoading,
+                  onSearch: _searchUsers,
+                ),
+                const SizedBox(height: 20),
+                SearchResultsWidget(
+                  results: _searchResults,
+                  isLoading: _isLoading,
+                  onAddFriend: _sendFriendRequest,
+                ),
+                const SizedBox(height: 20),
+                AddFriendRequestsWidget(
+                  friendRequests: _friendRequests,
+                  isLoading: _isLoading,
+                  onAccept: _acceptFriendRequest,
+                  onDecline: _declineFriendRequest,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
-

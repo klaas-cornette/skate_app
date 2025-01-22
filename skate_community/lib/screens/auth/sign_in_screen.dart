@@ -44,11 +44,35 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: const Text(
+              'Sign In',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor:
+                Colors.transparent, // Transparant om de gradient te tonen
+            elevation: 0, // Geen schaduw
+            iconTheme:
+                const IconThemeData(color: Colors.white), // Witte icoonkleur
+          ),
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -61,6 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xFF0C1033), // Consistente tekstkleur
                 ),
               ),
               const SizedBox(height: 20),
@@ -68,8 +93,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
+                  labelStyle: TextStyle(
+                      color: Color(0xFF0C1033)), // Consistente labelkleur
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -78,8 +108,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
                 obscureText: true,
@@ -91,6 +125,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       onPressed: _signIn,
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
+                        backgroundColor:
+                            Color(0xFF0C1033), // Knoopkleur in thema
+                        foregroundColor: Colors.white, // Witte tekst
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
                       child: const Text('Sign In'),
                     ),
@@ -98,7 +138,11 @@ class _SignInScreenState extends State<SignInScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Don\'t have an account?'),
+                  const Text(
+                    'Don\'t have an account?',
+                    style: TextStyle(
+                        color: Color(0xFF0C1033)), // Consistente tekstkleur
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -108,7 +152,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       );
                     },
-                    child: const Text('Sign Up'),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(color: Color(0xFF9AC4F5)), // Accentkleur
+                    ),
                   ),
                 ],
               ),

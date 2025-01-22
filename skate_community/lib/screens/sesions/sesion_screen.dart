@@ -1,10 +1,13 @@
 // session_screen.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:skate_community/services/sesion_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SessionScreen extends StatefulWidget {
+  const SessionScreen({super.key});
+
   @override
   _SessionScreenState createState() => _SessionScreenState();
 }
@@ -12,7 +15,10 @@ class SessionScreen extends StatefulWidget {
 class _SessionScreenState extends State<SessionScreen> {
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _startTime = TimeOfDay.now();
-  TimeOfDay _endTime = TimeOfDay(hour: (TimeOfDay.now().hour + (TimeOfDay.now().minute + 30) ~/ 60) % 24, minute: (TimeOfDay.now().minute + 30) % 60,);
+  TimeOfDay _endTime = TimeOfDay(
+    hour: (TimeOfDay.now().hour + (TimeOfDay.now().minute + 30) ~/ 60) % 24,
+    minute: (TimeOfDay.now().minute + 30) % 60,
+  );
   String? _selectedSkatepark;
   List<Map<String, dynamic>> _skateparks = [];
   final SesionService _sesionService = SesionService();
@@ -62,9 +68,9 @@ class _SessionScreenState extends State<SessionScreen> {
   }
 
   String _combineDateAndTime(DateTime date, TimeOfDay time) {
-    final dt =DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    final dt =
+        DateTime(date.year, date.month, date.day, time.hour, time.minute);
     final utcDateTime = dt.toUtc(); // Zet om naar UTC
-    print(DateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS'Z'").format(utcDateTime));
     return DateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS'Z'").format(utcDateTime);
   }
 
@@ -100,7 +106,10 @@ class _SessionScreenState extends State<SessionScreen> {
       return;
     }
 
-    if (DateTime.parse(endTime).difference(DateTime.parse(startTime)).inMinutes < 30) {
+    if (DateTime.parse(endTime)
+            .difference(DateTime.parse(startTime))
+            .inMinutes <
+        30) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Sessie moet minimaal 30 minuten duren!')),
       );
@@ -123,88 +132,142 @@ class _SessionScreenState extends State<SessionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nieuwe Sessie'),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
-          elevation: 4.0,
-          child: Padding(
+          child: AppBar(
+            title: const Text(
+              'Nieuwe Sessie',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+          ),
+        ),
+      ),
+      body: BackgroundWrapper(
+        child: Center(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('Plan je sessie',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
-                SizedBox(height: 20),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(
-                      'Datum: ${DateFormat('yyyy-MM-dd').format(_selectedDate)}',
-                      style: TextStyle(fontSize: 16)),
-                  trailing: Icon(Icons.calendar_today,
-                      color: Theme.of(context).primaryColor),
-                  onTap: () => _selectDate(context),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 400, // Limiteer de breedte van de card
+              ),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                Divider(),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text('Starttijd: ${_startTime.format(context)}',
-                      style: TextStyle(fontSize: 16)),
-                  trailing: Icon(Icons.access_time,
-                      color: Theme.of(context).primaryColor),
-                  onTap: () => _selectTime(context, true),
-                ),
-                Divider(),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text('Eindtijd: ${_endTime.format(context)}',
-                      style: TextStyle(fontSize: 16)),
-                  trailing: Icon(Icons.access_time,
-                      color: Theme.of(context).primaryColor),
-                  onTap: () => _selectTime(context, false),
-                ),
-                Divider(),
-                DropdownButtonFormField<String>(
-                  value: _selectedSkatepark,
-                  items: _skateparks.map((skatepark) {
-                    return DropdownMenuItem(
-                      value: skatepark['id'].toString(),
-                      child: Text(skatepark['name']),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedSkatepark = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Kies een Skatepark',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                elevation: 4.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(height: 20),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          'Datum: ${DateFormat('yyyy-MM-dd').format(_selectedDate)}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF0C1033),
+                          ),
+                        ),
+                        trailing: const Icon(
+                          Icons.calendar_today,
+                          color: Color(0xFF0C1033),
+                        ),
+                        onTap: () => _selectDate(context),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          'Starttijd: ${_startTime.format(context)}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF0C1033),
+                          ),
+                        ),
+                        trailing: const Icon(
+                          Icons.access_time,
+                          color: Color(0xFF0C1033),
+                        ),
+                        onTap: () => _selectTime(context, true),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          'Eindtijd: ${_endTime.format(context)}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF0C1033),
+                          ),
+                        ),
+                        trailing: const Icon(
+                          Icons.access_time,
+                          color: Color(0xFF0C1033),
+                        ),
+                        onTap: () => _selectTime(context, false),
+                      ),
+                      const Divider(),
+                      DropdownButtonFormField<String>(
+                        value: _selectedSkatepark,
+                        items: _skateparks.map((skatepark) {
+                          return DropdownMenuItem(
+                            value: skatepark['id'].toString(),
+                            child: Text(skatepark['name']),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedSkatepark = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Kies een Skatepark',
+                          labelStyle: const TextStyle(color: Color(0xFF0C1033)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF0C1033)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: _createSession,
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          backgroundColor: const Color(0xFF0C1033),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        ),
+                        child: const Text(
+                          'Sessie Aanmaken',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _createSession,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                  ),
-                  child:
-                      Text('Sessie Aanmaken', style: TextStyle(fontSize: 16)),
-                ),
-              ],
+              ),
             ),
           ),
         ),

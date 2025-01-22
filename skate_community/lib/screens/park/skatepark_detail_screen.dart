@@ -1,7 +1,10 @@
-// lib/screens/skatepark_detail_screen.dart
-
 import 'package:flutter/material.dart';
-import 'package:skate_community/services/skatepark_service.dart'; // Adjust the path as necessary
+import 'package:skate_community/screens/widgets/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/detail_card_widget.dart';
+import 'package:skate_community/screens/widgets/foto_section_widget.dart';
+import 'package:skate_community/screens/widgets/session_list_widget.dart';
+import 'package:skate_community/services/skatepark_service.dart';
+import 'package:skate_community/services/sesion_service.dart';
 
 class SkateparkDetailScreen extends StatefulWidget {
   final String skateparkId;
@@ -14,27 +17,32 @@ class SkateparkDetailScreen extends StatefulWidget {
 
 class _SkateparkDetailScreenState extends State<SkateparkDetailScreen> {
   Map<String, dynamic>? skatepark;
+  List<Map<String, dynamic>> sessions = [];
   bool isLoading = true;
   String? error;
 
   @override
   void initState() {
     super.initState();
-    _fetchSkateparkDetail();
+    _fetchSkateparkDetailsAndSessions();
   }
 
-  Future<void> _fetchSkateparkDetail() async {
+  Future<void> _fetchSkateparkDetailsAndSessions() async {
     try {
-      // Probeer het skatepark op te halen
+      final SesionService sesionService = SesionService();
       final SkateparkService skateparkService = SkateparkService();
-      final Map data = await skateparkService.fetchSkateparkById(widget.skateparkId);
+      final Map data =
+          await skateparkService.fetchSkateparkById(widget.skateparkId);
+
+      final List<Map<String, dynamic>> sessionData =
+          await sesionService.getFilteredSessions(widget.skateparkId);
 
       setState(() {
         skatepark = data.cast<String, dynamic>();
+        sessions = sessionData;
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching skatepark details: $e');
       setState(() {
         error = e.toString();
         isLoading = false;
@@ -42,160 +50,80 @@ class _SkateparkDetailScreenState extends State<SkateparkDetailScreen> {
     }
   }
 
-  Widget _buildDetailCard() {
-    return Card(
-      elevation: 6,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Naam van het skatepark
-            Text(
-              skatepark!['name'],
-              style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal),
-            ),
-            SizedBox(height: 10),
-            // Locatie
-            Row(
-              children: [
-                Icon(Icons.location_on, color: Colors.teal),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    skatepark!['locationName'],
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ],
-            ),
-            Divider(height: 30, thickness: 1.5),
-            // Binnen/Buiten
-            Row(
-              children: [
-                Icon(Icons.toggle_on, color: Colors.blue),
-                SizedBox(width: 8),
-                Text(
-                  'Buiten: ${skatepark!['indoor'] ? 'Nee' : 'Ja'}',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            // WC aanwezig
-            Row(
-              children: [
-                Icon(Icons.wc, color: Colors.purple),
-                SizedBox(width: 8),
-                Text(
-                  'WC: ${skatepark!['hasWc'] ? 'Ja' : 'Nee'}',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            // Verlichting
-            Row(
-              children: [
-                Icon(Icons.lightbulb, color: Colors.yellow[700]),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Verlichting: ${skatepark!['lightedUntil']}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            // Grootte
-            Row(
-              children: [
-                Icon(Icons.aspect_ratio, color: Colors.green),
-                SizedBox(width: 8),
-                Text(
-                  'Grootte: ${skatepark!['size']}',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            // Placeholder voor extra details (zoals geplande sessies)
-            // Je kunt hier extra widgets toevoegen zoals knoppen of foto's
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPhotoSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Image.network(
-          'https://shop.thrashermagazine.com/cdn/shop/files/TH0324-Cover_cp14-1200.jpg?v=1704485795',
-          height: 200,
-          width: double.infinity,
-          fit: BoxFit.cover,
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            return Center(child: CircularProgressIndicator());
-          },
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              height: 200,
-              color: Colors.grey[300],
-              child:
-                  Center(child: Icon(Icons.error, color: Colors.red, size: 40)),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Text(skatepark != null ? skatepark!['name'] : 'Skatepark Details'),
-        backgroundColor: Colors.teal,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: Text(
+              skatepark != null ? skatepark!['name'] : 'Skatepark Details',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+          ),
+        ),
       ),
-      body: isLoading
-          ? Center(child: CircularProgressIndicator())
-          : error != null
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Fout bij het laden van details:\n$error',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.red),
+      body: BackgroundWrapper(
+        child: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : error != null
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Fout bij het laden van details:\n$error',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 16, color: Colors.red),
+                      ),
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 10),
+                        PhotoSection(
+                          imageUrl: skatepark?['imageUrl'],
+                        ),
+                        DetailCard(skatepark: skatepark),
+                        Card(
+                          color: Color(0xFF9AC4F5), // Nieuwe achtergrondkleur
+                          child: SizedBox(
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Text(
+                                  'Geplande Sessies',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF0C1033), // Tekstkleur wit
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SessionList(sessions: sessions),
+                      ],
                     ),
                   ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      _buildPhotoSection(),
-                      _buildDetailCard(),
-                      // Voeg hier extra widgets toe zoals reviews, geplande sessies, etc.
-                      // Bijvoorbeeld een sectie voor gebruikersreviews:
-                    
-                      SizedBox(height: 10),
-                      // Placeholder voor reviews
-                     
-                    ],
-                  ),
-                ),
+      ),
     );
   }
 }

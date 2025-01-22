@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:skate_community/screens/chat/chat_messages_screen.dart';
 import 'package:skate_community/screens/friends/friends_list_screen.dart';
+import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
 
@@ -48,7 +49,6 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     } catch (e) {
       setError('Error fetching chats: $e');
-      print('Error fetching chats: $e');
     } finally {
       setLoading(false);
     }
@@ -108,7 +108,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     MaterialPageRoute(
                       builder: (context) => ChatMessagesScreen(
                         chatId: chat['id'],
-                        chatPartnerName: chatPartnerUsername, // Zorg dat je de naam doorgeeft
+                        chatPartnerName:
+                            chatPartnerUsername, // Zorg dat je de naam doorgeeft
                       ),
                     ),
                   );
@@ -120,26 +121,53 @@ class _ChatScreenState extends State<ChatScreen> {
       ],
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chats'),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-               Navigator.push(
-                 context,
-                 MaterialPageRoute(builder: (context) => FriendsListScreen()),
-               );
-              }),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: const Text(
+              'Chats',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor:
+                Colors.transparent, // Transparant om de gradient te tonen
+            elevation: 0, // Geen schaduw
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add, color: Colors.white), // Witte icoon
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FriendsListScreen()),
+                  );
+                },
+              ),
+            ],
+            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
+          ),
         ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: _buildChatList(),
+      ),
+      body: BackgroundWrapper(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildChatList(),
+        ),
       ),
     );
   }

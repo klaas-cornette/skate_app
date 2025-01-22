@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:skate_community/screens/chat/chat_messages_screen.dart';
 import 'package:skate_community/screens/chat/chat_screen.dart';
 import 'package:skate_community/screens/sesions/sesion_screen.dart';
 import 'package:skate_community/screens/settings/settings_sreen.dart';
@@ -77,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Locatiepermissie vereist'),
-        content: Text('Deze app heeft locatiepermissies nodig om correct te functioneren.'),
+        content: Text(
+            'Deze app heeft locatiepermissies nodig om correct te functioneren.'),
         actions: [
           TextButton(
             child: Text('Annuleren'),
@@ -100,89 +100,111 @@ class _HomeScreenState extends State<HomeScreen> {
       final SkateparkService skateparkService = SkateparkService();
       final List<dynamic> skateparks = await skateparkService.fetchSkateparks();
 
+      // Laad het aangepaste icoon
+      // ignore: deprecated_member_use
+      final BitmapDescriptor customIcon = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(),
+        'assets/images/marker.png',
+      );
+
+      // Genereer de lijst met markers
+      final List<Marker> markers = skateparks
+          .where(
+              (park) => park['latitude'] != null && park['longitude'] != null)
+          .map<Marker>((park) {
+        return Marker(
+          markerId: MarkerId(park['id']),
+          position: LatLng(park['latitude'], park['longitude']),
+          infoWindow: InfoWindow(
+            title: park['name'],
+            snippet: '📍 ${park['address'] ?? 'Geen adres beschikbaar'}',
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      SkateparkDetailScreen(skateparkId: park['id']),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.easeInOut;
+
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    var offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          icon: customIcon,
+        );
+      }).toList();
+
+      // Update de markers in de state
       setState(() {
         _markers.clear();
-        _markers.addAll(skateparks.map((park) {
-          if (park['latitude'] != null && park['longitude'] != null) {
-            return Marker(
-              markerId: MarkerId(park['id']),
-              position: LatLng(park['latitude'], park['longitude']),
-              infoWindow: InfoWindow(
-                title: park['name'], // Gebruik de juiste sleutel
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SkateparkDetailScreen(
-                        skateparkId: park['id'],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-            );
-          } else {
-            return Marker(
-              markerId: MarkerId('invalid_${park['id']}'),
-              position: LatLng(0, 0),
-              infoWindow: InfoWindow(
-                title: 'Onbekende Locatie',
-              ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-            );
-          }
-        }).toSet());
+        _markers.addAll(markers);
       });
-    } catch (e) {
-      print('Error fetching skateparks: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error fetching skateparks: $e')),
-      );
+    } catch (error) {
+      print('Error loading skatepark markers: $error');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Skate Community',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            shadows: [
-              Shadow(
-                blurRadius: 10.0,
-                color: Colors.black,
-                offset: Offset(2.0, 2.0),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: Text(
+              'Skate Flow',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Raleway', // Zorg dat 'Raleway' juist is toegevoegd
+              ),
+            ),
+            backgroundColor:
+                Colors.transparent, // Transparant om de gradient te tonen
+            elevation: 0, // Verwijder schaduw
+            actions: [
+              IconButton(
+                icon: Icon(Icons.logout,
+                    color: Colors.white), // Witte kleur voor icoon
+                onPressed: () async {
+                  await Supabase.instance.client.auth.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                  );
+                },
               ),
             ],
+            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
           ),
         ),
-        backgroundColor: Colors.teal, // Aangepaste AppBar kleur
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            style: ButtonStyle(
-              foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-            ),  // Witte tekstkleur
-            onPressed: () async {
-              await Supabase.instance.client.auth.signOut();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => SignInScreen()),
-              );
-            },
-          ),
-        ],
       ),
       drawer: Drawer(
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.teal, Colors.green],
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -196,25 +218,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    'Skate Community',
+                    'Skate Flow',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 10.0,
-                          color: Colors.black,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
+                      fontFamily: 'Raleway',
                     ),
                   ),
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.map, color: Colors.white),
-                title: Text('Home', style: TextStyle(color: Colors.white)),
+                leading: Icon(Icons.map, color: Colors.white), // Witte icoon
+                title: Text('Home',
+                    style: TextStyle(color: Colors.white)), // Witte tekst
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -225,7 +242,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => FriendsListScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => FriendsListScreen()),
                   );
                 },
               ),
@@ -251,7 +269,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.white),
-                title: Text('Instellingen', style: TextStyle(color: Colors.white)),
+                title:
+                    Text('Instellingen', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -286,12 +305,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat, // Verplaatst naar linker onderkant
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: _fetchSkateparks,
-        backgroundColor: Colors.tealAccent, // Gebruik een accentkleur
+        backgroundColor: Color(0xFF0C1033), // Gebruik een accentkleur
         tooltip: 'Ververs Skateparken',
-        child: Icon(Icons.refresh),
+        child: Icon(
+          Icons.refresh,
+          color: Colors.white, // Witte icoonkleur
+          ),
       ),
     );
   }

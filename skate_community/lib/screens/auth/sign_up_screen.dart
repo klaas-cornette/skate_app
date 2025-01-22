@@ -31,28 +31,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       // Controleer of de gebruiker succesvol is aangemaakt
       if (response.user != null) {
-
         // Voeg gebruiker toe aan de `users`-tabel
-       await _authService.addUserToDatabase(
+        await _authService.addUserToDatabase(
           response.user!.id,
           _emailController.text,
           _usernameController.text,
         );
 
-        
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Account successfully created!')),
         );
-
       } else {
         throw Exception('User registration failed. User is null.');
       }
-     } catch (e) {
-       ScaffoldMessenger.of(context).showSnackBar(
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),
-     );
-     } 
-      finally {
+      );
+    } finally {
       setState(() {
         _isLoading = false;
       });
@@ -65,8 +61,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: AppBar(
+            title: const Text(
+              'Sign Up',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor:
+                Colors.transparent, // Transparant om de gradient te tonen
+            elevation: 0, // Geen schaduw
+            iconTheme:
+                const IconThemeData(color: Colors.white), // Witte icoonkleur
+          ),
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -79,6 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xFF0C1033), // Consistente tekstkleur
                 ),
               ),
               const SizedBox(height: 20),
@@ -86,8 +107,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
+                  labelStyle: TextStyle(
+                      color: Color(0xFF0C1033)), // Consistente labelkleur
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -96,8 +122,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
+                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -106,8 +136,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
                 obscureText: true,
@@ -119,6 +153,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onPressed: _signUp,
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
+                        backgroundColor:
+                            Color(0xFF0C1033), // Knopkleur in thema
+                        foregroundColor: Colors.white, // Witte tekst
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
                       child: const Text('Sign Up'),
                     ),
