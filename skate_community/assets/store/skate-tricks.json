@@ -1,0 +1,4027 @@
+[
+    {
+        "id": 1,
+        "name": "Regular Ollie",
+        "difficulty": 28
+    },
+    {
+        "id": 2,
+        "name": "Fakie Ollie",
+        "difficulty": 92
+    },
+    {
+        "id": 3,
+        "name": "Switch Ollie",
+        "difficulty": 1
+    },
+    {
+        "id": 4,
+        "name": "Nollie Ollie",
+        "difficulty": 7
+    },
+    {
+        "id": 5,
+        "name": "Ollie to 50-50",
+        "difficulty": 75
+    },
+    {
+        "id": 6,
+        "name": "Ollie to 5-0",
+        "difficulty": 84
+    },
+    {
+        "id": 7,
+        "name": "Ollie to Nosegrind",
+        "difficulty": 88
+    },
+    {
+        "id": 8,
+        "name": "Ollie to Crooked",
+        "difficulty": 55
+    },
+    {
+        "id": 9,
+        "name": "Ollie to Smith",
+        "difficulty": 69
+    },
+    {
+        "id": 10,
+        "name": "Ollie to Feeble",
+        "difficulty": 96
+    },
+    {
+        "id": 11,
+        "name": "Ollie to Boardslide",
+        "difficulty": 36
+    },
+    {
+        "id": 12,
+        "name": "Ollie to Lipslide",
+        "difficulty": 25
+    },
+    {
+        "id": 13,
+        "name": "Ollie to Bluntslide",
+        "difficulty": 19
+    },
+    {
+        "id": 14,
+        "name": "Ollie 180",
+        "difficulty": 82
+    },
+    {
+        "id": 15,
+        "name": "Ollie 360",
+        "difficulty": 71
+    },
+    {
+        "id": 16,
+        "name": "Ollie 540",
+        "difficulty": 82
+    },
+    {
+        "id": 17,
+        "name": "Ollie 720",
+        "difficulty": 48
+    },
+    {
+        "id": 18,
+        "name": "Ollie Over Gap",
+        "difficulty": 53
+    },
+    {
+        "id": 19,
+        "name": "Ollie Down Rail",
+        "difficulty": 75
+    },
+    {
+        "id": 20,
+        "name": "Ollie Down Stairs",
+        "difficulty": 63
+    },
+    {
+        "id": 21,
+        "name": "Ollie Manual",
+        "difficulty": 20
+    },
+    {
+        "id": 22,
+        "name": "Ollie Revert",
+        "difficulty": 62
+    },
+    {
+        "id": 23,
+        "name": "Ollie Body Varial",
+        "difficulty": 19
+    },
+    {
+        "id": 24,
+        "name": "Regular Kickflip",
+        "difficulty": 77
+    },
+    {
+        "id": 25,
+        "name": "Fakie Kickflip",
+        "difficulty": 36
+    },
+    {
+        "id": 26,
+        "name": "Switch Kickflip",
+        "difficulty": 99
+    },
+    {
+        "id": 27,
+        "name": "Nollie Kickflip",
+        "difficulty": 66
+    },
+    {
+        "id": 28,
+        "name": "Kickflip to 50-50",
+        "difficulty": 96
+    },
+    {
+        "id": 29,
+        "name": "Kickflip to 5-0",
+        "difficulty": 73
+    },
+    {
+        "id": 30,
+        "name": "Kickflip to Nosegrind",
+        "difficulty": 55
+    },
+    {
+        "id": 31,
+        "name": "Kickflip to Crooked",
+        "difficulty": 21
+    },
+    {
+        "id": 32,
+        "name": "Kickflip to Smith",
+        "difficulty": 39
+    },
+    {
+        "id": 33,
+        "name": "Kickflip to Feeble",
+        "difficulty": 9
+    },
+    {
+        "id": 34,
+        "name": "Kickflip to Boardslide",
+        "difficulty": 32
+    },
+    {
+        "id": 35,
+        "name": "Kickflip to Lipslide",
+        "difficulty": 79
+    },
+    {
+        "id": 36,
+        "name": "Kickflip to Bluntslide",
+        "difficulty": 71
+    },
+    {
+        "id": 37,
+        "name": "Kickflip 180",
+        "difficulty": 85
+    },
+    {
+        "id": 38,
+        "name": "Kickflip 360",
+        "difficulty": 3
+    },
+    {
+        "id": 39,
+        "name": "Kickflip 540",
+        "difficulty": 39
+    },
+    {
+        "id": 40,
+        "name": "Kickflip 720",
+        "difficulty": 51
+    },
+    {
+        "id": 41,
+        "name": "Kickflip Over Gap",
+        "difficulty": 98
+    },
+    {
+        "id": 42,
+        "name": "Kickflip Down Rail",
+        "difficulty": 8
+    },
+    {
+        "id": 43,
+        "name": "Kickflip Down Stairs",
+        "difficulty": 55
+    },
+    {
+        "id": 44,
+        "name": "Kickflip Manual",
+        "difficulty": 25
+    },
+    {
+        "id": 45,
+        "name": "Kickflip Revert",
+        "difficulty": 79
+    },
+    {
+        "id": 46,
+        "name": "Kickflip Body Varial",
+        "difficulty": 37
+    },
+    {
+        "id": 47,
+        "name": "Regular Heelflip",
+        "difficulty": 36
+    },
+    {
+        "id": 48,
+        "name": "Fakie Heelflip",
+        "difficulty": 74
+    },
+    {
+        "id": 49,
+        "name": "Switch Heelflip",
+        "difficulty": 61
+    },
+    {
+        "id": 50,
+        "name": "Nollie Heelflip",
+        "difficulty": 67
+    },
+    {
+        "id": 51,
+        "name": "Heelflip to 50-50",
+        "difficulty": 7
+    },
+    {
+        "id": 52,
+        "name": "Heelflip to 5-0",
+        "difficulty": 40
+    },
+    {
+        "id": 53,
+        "name": "Heelflip to Nosegrind",
+        "difficulty": 55
+    },
+    {
+        "id": 54,
+        "name": "Heelflip to Crooked",
+        "difficulty": 14
+    },
+    {
+        "id": 55,
+        "name": "Heelflip to Smith",
+        "difficulty": 61
+    },
+    {
+        "id": 56,
+        "name": "Heelflip to Feeble",
+        "difficulty": 27
+    },
+    {
+        "id": 57,
+        "name": "Heelflip to Boardslide",
+        "difficulty": 67
+    },
+    {
+        "id": 58,
+        "name": "Heelflip to Lipslide",
+        "difficulty": 17
+    },
+    {
+        "id": 59,
+        "name": "Heelflip to Bluntslide",
+        "difficulty": 20
+    },
+    {
+        "id": 60,
+        "name": "Heelflip 180",
+        "difficulty": 25
+    },
+    {
+        "id": 61,
+        "name": "Heelflip 360",
+        "difficulty": 95
+    },
+    {
+        "id": 62,
+        "name": "Heelflip 540",
+        "difficulty": 47
+    },
+    {
+        "id": 63,
+        "name": "Heelflip 720",
+        "difficulty": 56
+    },
+    {
+        "id": 64,
+        "name": "Heelflip Over Gap",
+        "difficulty": 26
+    },
+    {
+        "id": 65,
+        "name": "Heelflip Down Rail",
+        "difficulty": 44
+    },
+    {
+        "id": 66,
+        "name": "Heelflip Down Stairs",
+        "difficulty": 71
+    },
+    {
+        "id": 67,
+        "name": "Heelflip Manual",
+        "difficulty": 42
+    },
+    {
+        "id": 68,
+        "name": "Heelflip Revert",
+        "difficulty": 12
+    },
+    {
+        "id": 69,
+        "name": "Heelflip Body Varial",
+        "difficulty": 18
+    },
+    {
+        "id": 70,
+        "name": "Regular Pop Shove-it",
+        "difficulty": 35
+    },
+    {
+        "id": 71,
+        "name": "Fakie Pop Shove-it",
+        "difficulty": 57
+    },
+    {
+        "id": 72,
+        "name": "Switch Pop Shove-it",
+        "difficulty": 91
+    },
+    {
+        "id": 73,
+        "name": "Nollie Pop Shove-it",
+        "difficulty": 70
+    },
+    {
+        "id": 74,
+        "name": "Pop Shove-it to 50-50",
+        "difficulty": 77
+    },
+    {
+        "id": 75,
+        "name": "Pop Shove-it to 5-0",
+        "difficulty": 61
+    },
+    {
+        "id": 76,
+        "name": "Pop Shove-it to Nosegrind",
+        "difficulty": 53
+    },
+    {
+        "id": 77,
+        "name": "Pop Shove-it to Crooked",
+        "difficulty": 50
+    },
+    {
+        "id": 78,
+        "name": "Pop Shove-it to Smith",
+        "difficulty": 95
+    },
+    {
+        "id": 79,
+        "name": "Pop Shove-it to Feeble",
+        "difficulty": 42
+    },
+    {
+        "id": 80,
+        "name": "Pop Shove-it to Boardslide",
+        "difficulty": 16
+    },
+    {
+        "id": 81,
+        "name": "Pop Shove-it to Lipslide",
+        "difficulty": 9
+    },
+    {
+        "id": 82,
+        "name": "Pop Shove-it to Bluntslide",
+        "difficulty": 74
+    },
+    {
+        "id": 83,
+        "name": "Pop Shove-it 180",
+        "difficulty": 13
+    },
+    {
+        "id": 84,
+        "name": "Pop Shove-it 360",
+        "difficulty": 32
+    },
+    {
+        "id": 85,
+        "name": "Pop Shove-it 540",
+        "difficulty": 19
+    },
+    {
+        "id": 86,
+        "name": "Pop Shove-it 720",
+        "difficulty": 74
+    },
+    {
+        "id": 87,
+        "name": "Pop Shove-it Over Gap",
+        "difficulty": 25
+    },
+    {
+        "id": 88,
+        "name": "Pop Shove-it Down Rail",
+        "difficulty": 36
+    },
+    {
+        "id": 89,
+        "name": "Pop Shove-it Down Stairs",
+        "difficulty": 83
+    },
+    {
+        "id": 90,
+        "name": "Pop Shove-it Manual",
+        "difficulty": 64
+    },
+    {
+        "id": 91,
+        "name": "Pop Shove-it Revert",
+        "difficulty": 5
+    },
+    {
+        "id": 92,
+        "name": "Pop Shove-it Body Varial",
+        "difficulty": 97
+    },
+    {
+        "id": 93,
+        "name": "Regular Varial Kickflip",
+        "difficulty": 46
+    },
+    {
+        "id": 94,
+        "name": "Fakie Varial Kickflip",
+        "difficulty": 18
+    },
+    {
+        "id": 95,
+        "name": "Switch Varial Kickflip",
+        "difficulty": 62
+    },
+    {
+        "id": 96,
+        "name": "Nollie Varial Kickflip",
+        "difficulty": 24
+    },
+    {
+        "id": 97,
+        "name": "Varial Kickflip to 50-50",
+        "difficulty": 19
+    },
+    {
+        "id": 98,
+        "name": "Varial Kickflip to 5-0",
+        "difficulty": 47
+    },
+    {
+        "id": 99,
+        "name": "Varial Kickflip to Nosegrind",
+        "difficulty": 95
+    },
+    {
+        "id": 100,
+        "name": "Varial Kickflip to Crooked",
+        "difficulty": 67
+    },
+    {
+        "id": 101,
+        "name": "Varial Kickflip to Smith",
+        "difficulty": 31
+    },
+    {
+        "id": 102,
+        "name": "Varial Kickflip to Feeble",
+        "difficulty": 98
+    },
+    {
+        "id": 103,
+        "name": "Varial Kickflip to Boardslide",
+        "difficulty": 1
+    },
+    {
+        "id": 104,
+        "name": "Varial Kickflip to Lipslide",
+        "difficulty": 89
+    },
+    {
+        "id": 105,
+        "name": "Varial Kickflip to Bluntslide",
+        "difficulty": 26
+    },
+    {
+        "id": 106,
+        "name": "Varial Kickflip 180",
+        "difficulty": 53
+    },
+    {
+        "id": 107,
+        "name": "Varial Kickflip 360",
+        "difficulty": 20
+    },
+    {
+        "id": 108,
+        "name": "Varial Kickflip 540",
+        "difficulty": 86
+    },
+    {
+        "id": 109,
+        "name": "Varial Kickflip 720",
+        "difficulty": 46
+    },
+    {
+        "id": 110,
+        "name": "Varial Kickflip Over Gap",
+        "difficulty": 43
+    },
+    {
+        "id": 111,
+        "name": "Varial Kickflip Down Rail",
+        "difficulty": 1
+    },
+    {
+        "id": 112,
+        "name": "Varial Kickflip Down Stairs",
+        "difficulty": 49
+    },
+    {
+        "id": 113,
+        "name": "Varial Kickflip Manual",
+        "difficulty": 43
+    },
+    {
+        "id": 114,
+        "name": "Varial Kickflip Revert",
+        "difficulty": 44
+    },
+    {
+        "id": 115,
+        "name": "Varial Kickflip Body Varial",
+        "difficulty": 18
+    },
+    {
+        "id": 116,
+        "name": "Regular Varial Heelflip",
+        "difficulty": 91
+    },
+    {
+        "id": 117,
+        "name": "Fakie Varial Heelflip",
+        "difficulty": 64
+    },
+    {
+        "id": 118,
+        "name": "Switch Varial Heelflip",
+        "difficulty": 69
+    },
+    {
+        "id": 119,
+        "name": "Nollie Varial Heelflip",
+        "difficulty": 62
+    },
+    {
+        "id": 120,
+        "name": "Varial Heelflip to 50-50",
+        "difficulty": 43
+    },
+    {
+        "id": 121,
+        "name": "Varial Heelflip to 5-0",
+        "difficulty": 60
+    },
+    {
+        "id": 122,
+        "name": "Varial Heelflip to Nosegrind",
+        "difficulty": 61
+    },
+    {
+        "id": 123,
+        "name": "Varial Heelflip to Crooked",
+        "difficulty": 33
+    },
+    {
+        "id": 124,
+        "name": "Varial Heelflip to Smith",
+        "difficulty": 20
+    },
+    {
+        "id": 125,
+        "name": "Varial Heelflip to Feeble",
+        "difficulty": 78
+    },
+    {
+        "id": 126,
+        "name": "Varial Heelflip to Boardslide",
+        "difficulty": 84
+    },
+    {
+        "id": 127,
+        "name": "Varial Heelflip to Lipslide",
+        "difficulty": 92
+    },
+    {
+        "id": 128,
+        "name": "Varial Heelflip to Bluntslide",
+        "difficulty": 17
+    },
+    {
+        "id": 129,
+        "name": "Varial Heelflip 180",
+        "difficulty": 37
+    },
+    {
+        "id": 130,
+        "name": "Varial Heelflip 360",
+        "difficulty": 13
+    },
+    {
+        "id": 131,
+        "name": "Varial Heelflip 540",
+        "difficulty": 98
+    },
+    {
+        "id": 132,
+        "name": "Varial Heelflip 720",
+        "difficulty": 93
+    },
+    {
+        "id": 133,
+        "name": "Varial Heelflip Over Gap",
+        "difficulty": 30
+    },
+    {
+        "id": 134,
+        "name": "Varial Heelflip Down Rail",
+        "difficulty": 46
+    },
+    {
+        "id": 135,
+        "name": "Varial Heelflip Down Stairs",
+        "difficulty": 8
+    },
+    {
+        "id": 136,
+        "name": "Varial Heelflip Manual",
+        "difficulty": 90
+    },
+    {
+        "id": 137,
+        "name": "Varial Heelflip Revert",
+        "difficulty": 25
+    },
+    {
+        "id": 138,
+        "name": "Varial Heelflip Body Varial",
+        "difficulty": 45
+    },
+    {
+        "id": 139,
+        "name": "Regular 360 Flip",
+        "difficulty": 62
+    },
+    {
+        "id": 140,
+        "name": "Fakie 360 Flip",
+        "difficulty": 55
+    },
+    {
+        "id": 141,
+        "name": "Switch 360 Flip",
+        "difficulty": 24
+    },
+    {
+        "id": 142,
+        "name": "Nollie 360 Flip",
+        "difficulty": 70
+    },
+    {
+        "id": 143,
+        "name": "360 Flip to 50-50",
+        "difficulty": 78
+    },
+    {
+        "id": 144,
+        "name": "360 Flip to 5-0",
+        "difficulty": 63
+    },
+    {
+        "id": 145,
+        "name": "360 Flip to Nosegrind",
+        "difficulty": 2
+    },
+    {
+        "id": 146,
+        "name": "360 Flip to Crooked",
+        "difficulty": 68
+    },
+    {
+        "id": 147,
+        "name": "360 Flip to Smith",
+        "difficulty": 24
+    },
+    {
+        "id": 148,
+        "name": "360 Flip to Feeble",
+        "difficulty": 58
+    },
+    {
+        "id": 149,
+        "name": "360 Flip to Boardslide",
+        "difficulty": 71
+    },
+    {
+        "id": 150,
+        "name": "360 Flip to Lipslide",
+        "difficulty": 58
+    },
+    {
+        "id": 151,
+        "name": "360 Flip to Bluntslide",
+        "difficulty": 40
+    },
+    {
+        "id": 152,
+        "name": "360 Flip 180",
+        "difficulty": 22
+    },
+    {
+        "id": 153,
+        "name": "360 Flip 360",
+        "difficulty": 90
+    },
+    {
+        "id": 154,
+        "name": "360 Flip 540",
+        "difficulty": 39
+    },
+    {
+        "id": 155,
+        "name": "360 Flip 720",
+        "difficulty": 33
+    },
+    {
+        "id": 156,
+        "name": "360 Flip Over Gap",
+        "difficulty": 64
+    },
+    {
+        "id": 157,
+        "name": "360 Flip Down Rail",
+        "difficulty": 4
+    },
+    {
+        "id": 158,
+        "name": "360 Flip Down Stairs",
+        "difficulty": 18
+    },
+    {
+        "id": 159,
+        "name": "360 Flip Manual",
+        "difficulty": 82
+    },
+    {
+        "id": 160,
+        "name": "360 Flip Revert",
+        "difficulty": 6
+    },
+    {
+        "id": 161,
+        "name": "360 Flip Body Varial",
+        "difficulty": 42
+    },
+    {
+        "id": 162,
+        "name": "Regular Hardflip",
+        "difficulty": 25
+    },
+    {
+        "id": 163,
+        "name": "Fakie Hardflip",
+        "difficulty": 77
+    },
+    {
+        "id": 164,
+        "name": "Switch Hardflip",
+        "difficulty": 36
+    },
+    {
+        "id": 165,
+        "name": "Nollie Hardflip",
+        "difficulty": 16
+    },
+    {
+        "id": 166,
+        "name": "Hardflip to 50-50",
+        "difficulty": 72
+    },
+    {
+        "id": 167,
+        "name": "Hardflip to 5-0",
+        "difficulty": 28
+    },
+    {
+        "id": 168,
+        "name": "Hardflip to Nosegrind",
+        "difficulty": 71
+    },
+    {
+        "id": 169,
+        "name": "Hardflip to Crooked",
+        "difficulty": 49
+    },
+    {
+        "id": 170,
+        "name": "Hardflip to Smith",
+        "difficulty": 38
+    },
+    {
+        "id": 171,
+        "name": "Hardflip to Feeble",
+        "difficulty": 21
+    },
+    {
+        "id": 172,
+        "name": "Hardflip to Boardslide",
+        "difficulty": 28
+    },
+    {
+        "id": 173,
+        "name": "Hardflip to Lipslide",
+        "difficulty": 56
+    },
+    {
+        "id": 174,
+        "name": "Hardflip to Bluntslide",
+        "difficulty": 48
+    },
+    {
+        "id": 175,
+        "name": "Hardflip 180",
+        "difficulty": 97
+    },
+    {
+        "id": 176,
+        "name": "Hardflip 360",
+        "difficulty": 94
+    },
+    {
+        "id": 177,
+        "name": "Hardflip 540",
+        "difficulty": 53
+    },
+    {
+        "id": 178,
+        "name": "Hardflip 720",
+        "difficulty": 17
+    },
+    {
+        "id": 179,
+        "name": "Hardflip Over Gap",
+        "difficulty": 54
+    },
+    {
+        "id": 180,
+        "name": "Hardflip Down Rail",
+        "difficulty": 60
+    },
+    {
+        "id": 181,
+        "name": "Hardflip Down Stairs",
+        "difficulty": 73
+    },
+    {
+        "id": 182,
+        "name": "Hardflip Manual",
+        "difficulty": 48
+    },
+    {
+        "id": 183,
+        "name": "Hardflip Revert",
+        "difficulty": 68
+    },
+    {
+        "id": 184,
+        "name": "Hardflip Body Varial",
+        "difficulty": 45
+    },
+    {
+        "id": 185,
+        "name": "Regular Inward Heelflip",
+        "difficulty": 52
+    },
+    {
+        "id": 186,
+        "name": "Fakie Inward Heelflip",
+        "difficulty": 53
+    },
+    {
+        "id": 187,
+        "name": "Switch Inward Heelflip",
+        "difficulty": 48
+    },
+    {
+        "id": 188,
+        "name": "Nollie Inward Heelflip",
+        "difficulty": 4
+    },
+    {
+        "id": 189,
+        "name": "Inward Heelflip to 50-50",
+        "difficulty": 23
+    },
+    {
+        "id": 190,
+        "name": "Inward Heelflip to 5-0",
+        "difficulty": 95
+    },
+    {
+        "id": 191,
+        "name": "Inward Heelflip to Nosegrind",
+        "difficulty": 92
+    },
+    {
+        "id": 192,
+        "name": "Inward Heelflip to Crooked",
+        "difficulty": 22
+    },
+    {
+        "id": 193,
+        "name": "Inward Heelflip to Smith",
+        "difficulty": 69
+    },
+    {
+        "id": 194,
+        "name": "Inward Heelflip to Feeble",
+        "difficulty": 85
+    },
+    {
+        "id": 195,
+        "name": "Inward Heelflip to Boardslide",
+        "difficulty": 36
+    },
+    {
+        "id": 196,
+        "name": "Inward Heelflip to Lipslide",
+        "difficulty": 99
+    },
+    {
+        "id": 197,
+        "name": "Inward Heelflip to Bluntslide",
+        "difficulty": 79
+    },
+    {
+        "id": 198,
+        "name": "Inward Heelflip 180",
+        "difficulty": 52
+    },
+    {
+        "id": 199,
+        "name": "Inward Heelflip 360",
+        "difficulty": 28
+    },
+    {
+        "id": 200,
+        "name": "Inward Heelflip 540",
+        "difficulty": 28
+    },
+    {
+        "id": 201,
+        "name": "Inward Heelflip 720",
+        "difficulty": 42
+    },
+    {
+        "id": 202,
+        "name": "Inward Heelflip Over Gap",
+        "difficulty": 63
+    },
+    {
+        "id": 203,
+        "name": "Inward Heelflip Down Rail",
+        "difficulty": 86
+    },
+    {
+        "id": 204,
+        "name": "Inward Heelflip Down Stairs",
+        "difficulty": 66
+    },
+    {
+        "id": 205,
+        "name": "Inward Heelflip Manual",
+        "difficulty": 49
+    },
+    {
+        "id": 206,
+        "name": "Inward Heelflip Revert",
+        "difficulty": 74
+    },
+    {
+        "id": 207,
+        "name": "Inward Heelflip Body Varial",
+        "difficulty": 27
+    },
+    {
+        "id": 208,
+        "name": "Regular Bigspin",
+        "difficulty": 91
+    },
+    {
+        "id": 209,
+        "name": "Fakie Bigspin",
+        "difficulty": 41
+    },
+    {
+        "id": 210,
+        "name": "Switch Bigspin",
+        "difficulty": 83
+    },
+    {
+        "id": 211,
+        "name": "Nollie Bigspin",
+        "difficulty": 15
+    },
+    {
+        "id": 212,
+        "name": "Bigspin to 50-50",
+        "difficulty": 6
+    },
+    {
+        "id": 213,
+        "name": "Bigspin to 5-0",
+        "difficulty": 24
+    },
+    {
+        "id": 214,
+        "name": "Bigspin to Nosegrind",
+        "difficulty": 41
+    },
+    {
+        "id": 215,
+        "name": "Bigspin to Crooked",
+        "difficulty": 4
+    },
+    {
+        "id": 216,
+        "name": "Bigspin to Smith",
+        "difficulty": 3
+    },
+    {
+        "id": 217,
+        "name": "Bigspin to Feeble",
+        "difficulty": 53
+    },
+    {
+        "id": 218,
+        "name": "Bigspin to Boardslide",
+        "difficulty": 10
+    },
+    {
+        "id": 219,
+        "name": "Bigspin to Lipslide",
+        "difficulty": 53
+    },
+    {
+        "id": 220,
+        "name": "Bigspin to Bluntslide",
+        "difficulty": 53
+    },
+    {
+        "id": 221,
+        "name": "Bigspin 180",
+        "difficulty": 49
+    },
+    {
+        "id": 222,
+        "name": "Bigspin 360",
+        "difficulty": 73
+    },
+    {
+        "id": 223,
+        "name": "Bigspin 540",
+        "difficulty": 24
+    },
+    {
+        "id": 224,
+        "name": "Bigspin 720",
+        "difficulty": 17
+    },
+    {
+        "id": 225,
+        "name": "Bigspin Over Gap",
+        "difficulty": 77
+    },
+    {
+        "id": 226,
+        "name": "Bigspin Down Rail",
+        "difficulty": 71
+    },
+    {
+        "id": 227,
+        "name": "Bigspin Down Stairs",
+        "difficulty": 18
+    },
+    {
+        "id": 228,
+        "name": "Bigspin Manual",
+        "difficulty": 9
+    },
+    {
+        "id": 229,
+        "name": "Bigspin Revert",
+        "difficulty": 55
+    },
+    {
+        "id": 230,
+        "name": "Bigspin Body Varial",
+        "difficulty": 56
+    },
+    {
+        "id": 231,
+        "name": "Regular Impossible",
+        "difficulty": 60
+    },
+    {
+        "id": 232,
+        "name": "Fakie Impossible",
+        "difficulty": 45
+    },
+    {
+        "id": 233,
+        "name": "Switch Impossible",
+        "difficulty": 48
+    },
+    {
+        "id": 234,
+        "name": "Nollie Impossible",
+        "difficulty": 42
+    },
+    {
+        "id": 235,
+        "name": "Impossible to 50-50",
+        "difficulty": 46
+    },
+    {
+        "id": 236,
+        "name": "Impossible to 5-0",
+        "difficulty": 17
+    },
+    {
+        "id": 237,
+        "name": "Impossible to Nosegrind",
+        "difficulty": 5
+    },
+    {
+        "id": 238,
+        "name": "Impossible to Crooked",
+        "difficulty": 55
+    },
+    {
+        "id": 239,
+        "name": "Impossible to Smith",
+        "difficulty": 27
+    },
+    {
+        "id": 240,
+        "name": "Impossible to Feeble",
+        "difficulty": 51
+    },
+    {
+        "id": 241,
+        "name": "Impossible to Boardslide",
+        "difficulty": 30
+    },
+    {
+        "id": 242,
+        "name": "Impossible to Lipslide",
+        "difficulty": 35
+    },
+    {
+        "id": 243,
+        "name": "Impossible to Bluntslide",
+        "difficulty": 94
+    },
+    {
+        "id": 244,
+        "name": "Impossible 180",
+        "difficulty": 95
+    },
+    {
+        "id": 245,
+        "name": "Impossible 360",
+        "difficulty": 43
+    },
+    {
+        "id": 246,
+        "name": "Impossible 540",
+        "difficulty": 28
+    },
+    {
+        "id": 247,
+        "name": "Impossible 720",
+        "difficulty": 58
+    },
+    {
+        "id": 248,
+        "name": "Impossible Over Gap",
+        "difficulty": 21
+    },
+    {
+        "id": 249,
+        "name": "Impossible Down Rail",
+        "difficulty": 8
+    },
+    {
+        "id": 250,
+        "name": "Impossible Down Stairs",
+        "difficulty": 29
+    },
+    {
+        "id": 251,
+        "name": "Impossible Manual",
+        "difficulty": 69
+    },
+    {
+        "id": 252,
+        "name": "Impossible Revert",
+        "difficulty": 49
+    },
+    {
+        "id": 253,
+        "name": "Impossible Body Varial",
+        "difficulty": 99
+    },
+    {
+        "id": 254,
+        "name": "Regular Frontside 180",
+        "difficulty": 18
+    },
+    {
+        "id": 255,
+        "name": "Fakie Frontside 180",
+        "difficulty": 63
+    },
+    {
+        "id": 256,
+        "name": "Switch Frontside 180",
+        "difficulty": 82
+    },
+    {
+        "id": 257,
+        "name": "Nollie Frontside 180",
+        "difficulty": 35
+    },
+    {
+        "id": 258,
+        "name": "Frontside 180 to 50-50",
+        "difficulty": 16
+    },
+    {
+        "id": 259,
+        "name": "Frontside 180 to 5-0",
+        "difficulty": 50
+    },
+    {
+        "id": 260,
+        "name": "Frontside 180 to Nosegrind",
+        "difficulty": 100
+    },
+    {
+        "id": 261,
+        "name": "Frontside 180 to Crooked",
+        "difficulty": 29
+    },
+    {
+        "id": 262,
+        "name": "Frontside 180 to Smith",
+        "difficulty": 83
+    },
+    {
+        "id": 263,
+        "name": "Frontside 180 to Feeble",
+        "difficulty": 41
+    },
+    {
+        "id": 264,
+        "name": "Frontside 180 to Boardslide",
+        "difficulty": 6
+    },
+    {
+        "id": 265,
+        "name": "Frontside 180 to Lipslide",
+        "difficulty": 61
+    },
+    {
+        "id": 266,
+        "name": "Frontside 180 to Bluntslide",
+        "difficulty": 71
+    },
+    {
+        "id": 267,
+        "name": "Frontside 180 180",
+        "difficulty": 87
+    },
+    {
+        "id": 268,
+        "name": "Frontside 180 360",
+        "difficulty": 7
+    },
+    {
+        "id": 269,
+        "name": "Frontside 180 540",
+        "difficulty": 21
+    },
+    {
+        "id": 270,
+        "name": "Frontside 180 720",
+        "difficulty": 26
+    },
+    {
+        "id": 271,
+        "name": "Frontside 180 Over Gap",
+        "difficulty": 58
+    },
+    {
+        "id": 272,
+        "name": "Frontside 180 Down Rail",
+        "difficulty": 28
+    },
+    {
+        "id": 273,
+        "name": "Frontside 180 Down Stairs",
+        "difficulty": 19
+    },
+    {
+        "id": 274,
+        "name": "Frontside 180 Manual",
+        "difficulty": 25
+    },
+    {
+        "id": 275,
+        "name": "Frontside 180 Revert",
+        "difficulty": 29
+    },
+    {
+        "id": 276,
+        "name": "Frontside 180 Body Varial",
+        "difficulty": 50
+    },
+    {
+        "id": 277,
+        "name": "Regular Backside 180",
+        "difficulty": 47
+    },
+    {
+        "id": 278,
+        "name": "Fakie Backside 180",
+        "difficulty": 64
+    },
+    {
+        "id": 279,
+        "name": "Switch Backside 180",
+        "difficulty": 83
+    },
+    {
+        "id": 280,
+        "name": "Nollie Backside 180",
+        "difficulty": 86
+    },
+    {
+        "id": 281,
+        "name": "Backside 180 to 50-50",
+        "difficulty": 76
+    },
+    {
+        "id": 282,
+        "name": "Backside 180 to 5-0",
+        "difficulty": 33
+    },
+    {
+        "id": 283,
+        "name": "Backside 180 to Nosegrind",
+        "difficulty": 53
+    },
+    {
+        "id": 284,
+        "name": "Backside 180 to Crooked",
+        "difficulty": 72
+    },
+    {
+        "id": 285,
+        "name": "Backside 180 to Smith",
+        "difficulty": 7
+    },
+    {
+        "id": 286,
+        "name": "Backside 180 to Feeble",
+        "difficulty": 98
+    },
+    {
+        "id": 287,
+        "name": "Backside 180 to Boardslide",
+        "difficulty": 96
+    },
+    {
+        "id": 288,
+        "name": "Backside 180 to Lipslide",
+        "difficulty": 73
+    },
+    {
+        "id": 289,
+        "name": "Backside 180 to Bluntslide",
+        "difficulty": 60
+    },
+    {
+        "id": 290,
+        "name": "Backside 180 180",
+        "difficulty": 75
+    },
+    {
+        "id": 291,
+        "name": "Backside 180 360",
+        "difficulty": 3
+    },
+    {
+        "id": 292,
+        "name": "Backside 180 540",
+        "difficulty": 18
+    },
+    {
+        "id": 293,
+        "name": "Backside 180 720",
+        "difficulty": 15
+    },
+    {
+        "id": 294,
+        "name": "Backside 180 Over Gap",
+        "difficulty": 91
+    },
+    {
+        "id": 295,
+        "name": "Backside 180 Down Rail",
+        "difficulty": 41
+    },
+    {
+        "id": 296,
+        "name": "Backside 180 Down Stairs",
+        "difficulty": 8
+    },
+    {
+        "id": 297,
+        "name": "Backside 180 Manual",
+        "difficulty": 90
+    },
+    {
+        "id": 298,
+        "name": "Backside 180 Revert",
+        "difficulty": 84
+    },
+    {
+        "id": 299,
+        "name": "Backside 180 Body Varial",
+        "difficulty": 16
+    },
+    {
+        "id": 300,
+        "name": "Regular Frontside 360",
+        "difficulty": 45
+    },
+    {
+        "id": 301,
+        "name": "Fakie Frontside 360",
+        "difficulty": 34
+    },
+    {
+        "id": 302,
+        "name": "Switch Frontside 360",
+        "difficulty": 38
+    },
+    {
+        "id": 303,
+        "name": "Nollie Frontside 360",
+        "difficulty": 18
+    },
+    {
+        "id": 304,
+        "name": "Frontside 360 to 50-50",
+        "difficulty": 15
+    },
+    {
+        "id": 305,
+        "name": "Frontside 360 to 5-0",
+        "difficulty": 26
+    },
+    {
+        "id": 306,
+        "name": "Frontside 360 to Nosegrind",
+        "difficulty": 33
+    },
+    {
+        "id": 307,
+        "name": "Frontside 360 to Crooked",
+        "difficulty": 31
+    },
+    {
+        "id": 308,
+        "name": "Frontside 360 to Smith",
+        "difficulty": 67
+    },
+    {
+        "id": 309,
+        "name": "Frontside 360 to Feeble",
+        "difficulty": 76
+    },
+    {
+        "id": 310,
+        "name": "Frontside 360 to Boardslide",
+        "difficulty": 14
+    },
+    {
+        "id": 311,
+        "name": "Frontside 360 to Lipslide",
+        "difficulty": 85
+    },
+    {
+        "id": 312,
+        "name": "Frontside 360 to Bluntslide",
+        "difficulty": 39
+    },
+    {
+        "id": 313,
+        "name": "Frontside 360 180",
+        "difficulty": 66
+    },
+    {
+        "id": 314,
+        "name": "Frontside 360 360",
+        "difficulty": 55
+    },
+    {
+        "id": 315,
+        "name": "Frontside 360 540",
+        "difficulty": 34
+    },
+    {
+        "id": 316,
+        "name": "Frontside 360 720",
+        "difficulty": 67
+    },
+    {
+        "id": 317,
+        "name": "Frontside 360 Over Gap",
+        "difficulty": 82
+    },
+    {
+        "id": 318,
+        "name": "Frontside 360 Down Rail",
+        "difficulty": 59
+    },
+    {
+        "id": 319,
+        "name": "Frontside 360 Down Stairs",
+        "difficulty": 90
+    },
+    {
+        "id": 320,
+        "name": "Frontside 360 Manual",
+        "difficulty": 14
+    },
+    {
+        "id": 321,
+        "name": "Frontside 360 Revert",
+        "difficulty": 68
+    },
+    {
+        "id": 322,
+        "name": "Frontside 360 Body Varial",
+        "difficulty": 56
+    },
+    {
+        "id": 323,
+        "name": "Regular Backside 360",
+        "difficulty": 92
+    },
+    {
+        "id": 324,
+        "name": "Fakie Backside 360",
+        "difficulty": 66
+    },
+    {
+        "id": 325,
+        "name": "Switch Backside 360",
+        "difficulty": 5
+    },
+    {
+        "id": 326,
+        "name": "Nollie Backside 360",
+        "difficulty": 36
+    },
+    {
+        "id": 327,
+        "name": "Backside 360 to 50-50",
+        "difficulty": 15
+    },
+    {
+        "id": 328,
+        "name": "Backside 360 to 5-0",
+        "difficulty": 13
+    },
+    {
+        "id": 329,
+        "name": "Backside 360 to Nosegrind",
+        "difficulty": 90
+    },
+    {
+        "id": 330,
+        "name": "Backside 360 to Crooked",
+        "difficulty": 100
+    },
+    {
+        "id": 331,
+        "name": "Backside 360 to Smith",
+        "difficulty": 4
+    },
+    {
+        "id": 332,
+        "name": "Backside 360 to Feeble",
+        "difficulty": 66
+    },
+    {
+        "id": 333,
+        "name": "Backside 360 to Boardslide",
+        "difficulty": 8
+    },
+    {
+        "id": 334,
+        "name": "Backside 360 to Lipslide",
+        "difficulty": 30
+    },
+    {
+        "id": 335,
+        "name": "Backside 360 to Bluntslide",
+        "difficulty": 65
+    },
+    {
+        "id": 336,
+        "name": "Backside 360 180",
+        "difficulty": 78
+    },
+    {
+        "id": 337,
+        "name": "Backside 360 360",
+        "difficulty": 19
+    },
+    {
+        "id": 338,
+        "name": "Backside 360 540",
+        "difficulty": 81
+    },
+    {
+        "id": 339,
+        "name": "Backside 360 720",
+        "difficulty": 66
+    },
+    {
+        "id": 340,
+        "name": "Backside 360 Over Gap",
+        "difficulty": 46
+    },
+    {
+        "id": 341,
+        "name": "Backside 360 Down Rail",
+        "difficulty": 35
+    },
+    {
+        "id": 342,
+        "name": "Backside 360 Down Stairs",
+        "difficulty": 65
+    },
+    {
+        "id": 343,
+        "name": "Backside 360 Manual",
+        "difficulty": 39
+    },
+    {
+        "id": 344,
+        "name": "Backside 360 Revert",
+        "difficulty": 85
+    },
+    {
+        "id": 345,
+        "name": "Backside 360 Body Varial",
+        "difficulty": 76
+    },
+    {
+        "id": 346,
+        "name": "Regular Nollie",
+        "difficulty": 52
+    },
+    {
+        "id": 347,
+        "name": "Fakie Nollie",
+        "difficulty": 73
+    },
+    {
+        "id": 348,
+        "name": "Switch Nollie",
+        "difficulty": 96
+    },
+    {
+        "id": 349,
+        "name": "Nollie Nollie",
+        "difficulty": 88
+    },
+    {
+        "id": 350,
+        "name": "Nollie to 50-50",
+        "difficulty": 34
+    },
+    {
+        "id": 351,
+        "name": "Nollie to 5-0",
+        "difficulty": 66
+    },
+    {
+        "id": 352,
+        "name": "Nollie to Nosegrind",
+        "difficulty": 36
+    },
+    {
+        "id": 353,
+        "name": "Nollie to Crooked",
+        "difficulty": 5
+    },
+    {
+        "id": 354,
+        "name": "Nollie to Smith",
+        "difficulty": 26
+    },
+    {
+        "id": 355,
+        "name": "Nollie to Feeble",
+        "difficulty": 16
+    },
+    {
+        "id": 356,
+        "name": "Nollie to Boardslide",
+        "difficulty": 60
+    },
+    {
+        "id": 357,
+        "name": "Nollie to Lipslide",
+        "difficulty": 34
+    },
+    {
+        "id": 358,
+        "name": "Nollie to Bluntslide",
+        "difficulty": 85
+    },
+    {
+        "id": 359,
+        "name": "Nollie 180",
+        "difficulty": 52
+    },
+    {
+        "id": 360,
+        "name": "Nollie 360",
+        "difficulty": 94
+    },
+    {
+        "id": 361,
+        "name": "Nollie 540",
+        "difficulty": 93
+    },
+    {
+        "id": 362,
+        "name": "Nollie 720",
+        "difficulty": 9
+    },
+    {
+        "id": 363,
+        "name": "Nollie Over Gap",
+        "difficulty": 73
+    },
+    {
+        "id": 364,
+        "name": "Nollie Down Rail",
+        "difficulty": 41
+    },
+    {
+        "id": 365,
+        "name": "Nollie Down Stairs",
+        "difficulty": 56
+    },
+    {
+        "id": 366,
+        "name": "Nollie Manual",
+        "difficulty": 43
+    },
+    {
+        "id": 367,
+        "name": "Nollie Revert",
+        "difficulty": 13
+    },
+    {
+        "id": 368,
+        "name": "Nollie Body Varial",
+        "difficulty": 28
+    },
+    {
+        "id": 369,
+        "name": "Regular Fakie Flip",
+        "difficulty": 54
+    },
+    {
+        "id": 370,
+        "name": "Fakie Fakie Flip",
+        "difficulty": 43
+    },
+    {
+        "id": 371,
+        "name": "Switch Fakie Flip",
+        "difficulty": 82
+    },
+    {
+        "id": 372,
+        "name": "Nollie Fakie Flip",
+        "difficulty": 99
+    },
+    {
+        "id": 373,
+        "name": "Fakie Flip to 50-50",
+        "difficulty": 53
+    },
+    {
+        "id": 374,
+        "name": "Fakie Flip to 5-0",
+        "difficulty": 52
+    },
+    {
+        "id": 375,
+        "name": "Fakie Flip to Nosegrind",
+        "difficulty": 74
+    },
+    {
+        "id": 376,
+        "name": "Fakie Flip to Crooked",
+        "difficulty": 24
+    },
+    {
+        "id": 377,
+        "name": "Fakie Flip to Smith",
+        "difficulty": 9
+    },
+    {
+        "id": 378,
+        "name": "Fakie Flip to Feeble",
+        "difficulty": 60
+    },
+    {
+        "id": 379,
+        "name": "Fakie Flip to Boardslide",
+        "difficulty": 54
+    },
+    {
+        "id": 380,
+        "name": "Fakie Flip to Lipslide",
+        "difficulty": 67
+    },
+    {
+        "id": 381,
+        "name": "Fakie Flip to Bluntslide",
+        "difficulty": 43
+    },
+    {
+        "id": 382,
+        "name": "Fakie Flip 180",
+        "difficulty": 37
+    },
+    {
+        "id": 383,
+        "name": "Fakie Flip 360",
+        "difficulty": 85
+    },
+    {
+        "id": 384,
+        "name": "Fakie Flip 540",
+        "difficulty": 39
+    },
+    {
+        "id": 385,
+        "name": "Fakie Flip 720",
+        "difficulty": 4
+    },
+    {
+        "id": 386,
+        "name": "Fakie Flip Over Gap",
+        "difficulty": 11
+    },
+    {
+        "id": 387,
+        "name": "Fakie Flip Down Rail",
+        "difficulty": 52
+    },
+    {
+        "id": 388,
+        "name": "Fakie Flip Down Stairs",
+        "difficulty": 67
+    },
+    {
+        "id": 389,
+        "name": "Fakie Flip Manual",
+        "difficulty": 67
+    },
+    {
+        "id": 390,
+        "name": "Fakie Flip Revert",
+        "difficulty": 19
+    },
+    {
+        "id": 391,
+        "name": "Fakie Flip Body Varial",
+        "difficulty": 97
+    },
+    {
+        "id": 392,
+        "name": "Regular Switch Kickflip",
+        "difficulty": 52
+    },
+    {
+        "id": 393,
+        "name": "Fakie Switch Kickflip",
+        "difficulty": 99
+    },
+    {
+        "id": 394,
+        "name": "Switch Switch Kickflip",
+        "difficulty": 52
+    },
+    {
+        "id": 395,
+        "name": "Nollie Switch Kickflip",
+        "difficulty": 59
+    },
+    {
+        "id": 396,
+        "name": "Switch Kickflip to 50-50",
+        "difficulty": 1
+    },
+    {
+        "id": 397,
+        "name": "Switch Kickflip to 5-0",
+        "difficulty": 8
+    },
+    {
+        "id": 398,
+        "name": "Switch Kickflip to Nosegrind",
+        "difficulty": 58
+    },
+    {
+        "id": 399,
+        "name": "Switch Kickflip to Crooked",
+        "difficulty": 91
+    },
+    {
+        "id": 400,
+        "name": "Switch Kickflip to Smith",
+        "difficulty": 41
+    },
+    {
+        "id": 401,
+        "name": "Switch Kickflip to Feeble",
+        "difficulty": 46
+    },
+    {
+        "id": 402,
+        "name": "Switch Kickflip to Boardslide",
+        "difficulty": 54
+    },
+    {
+        "id": 403,
+        "name": "Switch Kickflip to Lipslide",
+        "difficulty": 49
+    },
+    {
+        "id": 404,
+        "name": "Switch Kickflip to Bluntslide",
+        "difficulty": 92
+    },
+    {
+        "id": 405,
+        "name": "Switch Kickflip 180",
+        "difficulty": 72
+    },
+    {
+        "id": 406,
+        "name": "Switch Kickflip 360",
+        "difficulty": 11
+    },
+    {
+        "id": 407,
+        "name": "Switch Kickflip 540",
+        "difficulty": 40
+    },
+    {
+        "id": 408,
+        "name": "Switch Kickflip 720",
+        "difficulty": 96
+    },
+    {
+        "id": 409,
+        "name": "Switch Kickflip Over Gap",
+        "difficulty": 2
+    },
+    {
+        "id": 410,
+        "name": "Switch Kickflip Down Rail",
+        "difficulty": 98
+    },
+    {
+        "id": 411,
+        "name": "Switch Kickflip Down Stairs",
+        "difficulty": 72
+    },
+    {
+        "id": 412,
+        "name": "Switch Kickflip Manual",
+        "difficulty": 67
+    },
+    {
+        "id": 413,
+        "name": "Switch Kickflip Revert",
+        "difficulty": 26
+    },
+    {
+        "id": 414,
+        "name": "Switch Kickflip Body Varial",
+        "difficulty": 38
+    },
+    {
+        "id": 415,
+        "name": "Regular Switch Heelflip",
+        "difficulty": 40
+    },
+    {
+        "id": 416,
+        "name": "Fakie Switch Heelflip",
+        "difficulty": 1
+    },
+    {
+        "id": 417,
+        "name": "Switch Switch Heelflip",
+        "difficulty": 13
+    },
+    {
+        "id": 418,
+        "name": "Nollie Switch Heelflip",
+        "difficulty": 51
+    },
+    {
+        "id": 419,
+        "name": "Switch Heelflip to 50-50",
+        "difficulty": 27
+    },
+    {
+        "id": 420,
+        "name": "Switch Heelflip to 5-0",
+        "difficulty": 69
+    },
+    {
+        "id": 421,
+        "name": "Switch Heelflip to Nosegrind",
+        "difficulty": 76
+    },
+    {
+        "id": 422,
+        "name": "Switch Heelflip to Crooked",
+        "difficulty": 30
+    },
+    {
+        "id": 423,
+        "name": "Switch Heelflip to Smith",
+        "difficulty": 24
+    },
+    {
+        "id": 424,
+        "name": "Switch Heelflip to Feeble",
+        "difficulty": 60
+    },
+    {
+        "id": 425,
+        "name": "Switch Heelflip to Boardslide",
+        "difficulty": 30
+    },
+    {
+        "id": 426,
+        "name": "Switch Heelflip to Lipslide",
+        "difficulty": 22
+    },
+    {
+        "id": 427,
+        "name": "Switch Heelflip to Bluntslide",
+        "difficulty": 56
+    },
+    {
+        "id": 428,
+        "name": "Switch Heelflip 180",
+        "difficulty": 23
+    },
+    {
+        "id": 429,
+        "name": "Switch Heelflip 360",
+        "difficulty": 41
+    },
+    {
+        "id": 430,
+        "name": "Switch Heelflip 540",
+        "difficulty": 69
+    },
+    {
+        "id": 431,
+        "name": "Switch Heelflip 720",
+        "difficulty": 89
+    },
+    {
+        "id": 432,
+        "name": "Switch Heelflip Over Gap",
+        "difficulty": 19
+    },
+    {
+        "id": 433,
+        "name": "Switch Heelflip Down Rail",
+        "difficulty": 16
+    },
+    {
+        "id": 434,
+        "name": "Switch Heelflip Down Stairs",
+        "difficulty": 6
+    },
+    {
+        "id": 435,
+        "name": "Switch Heelflip Manual",
+        "difficulty": 89
+    },
+    {
+        "id": 436,
+        "name": "Switch Heelflip Revert",
+        "difficulty": 60
+    },
+    {
+        "id": 437,
+        "name": "Switch Heelflip Body Varial",
+        "difficulty": 39
+    },
+    {
+        "id": 438,
+        "name": "Regular Laser Flip",
+        "difficulty": 14
+    },
+    {
+        "id": 439,
+        "name": "Fakie Laser Flip",
+        "difficulty": 36
+    },
+    {
+        "id": 440,
+        "name": "Switch Laser Flip",
+        "difficulty": 28
+    },
+    {
+        "id": 441,
+        "name": "Nollie Laser Flip",
+        "difficulty": 75
+    },
+    {
+        "id": 442,
+        "name": "Laser Flip to 50-50",
+        "difficulty": 9
+    },
+    {
+        "id": 443,
+        "name": "Laser Flip to 5-0",
+        "difficulty": 57
+    },
+    {
+        "id": 444,
+        "name": "Laser Flip to Nosegrind",
+        "difficulty": 12
+    },
+    {
+        "id": 445,
+        "name": "Laser Flip to Crooked",
+        "difficulty": 13
+    },
+    {
+        "id": 446,
+        "name": "Laser Flip to Smith",
+        "difficulty": 82
+    },
+    {
+        "id": 447,
+        "name": "Laser Flip to Feeble",
+        "difficulty": 25
+    },
+    {
+        "id": 448,
+        "name": "Laser Flip to Boardslide",
+        "difficulty": 72
+    },
+    {
+        "id": 449,
+        "name": "Laser Flip to Lipslide",
+        "difficulty": 11
+    },
+    {
+        "id": 450,
+        "name": "Laser Flip to Bluntslide",
+        "difficulty": 34
+    },
+    {
+        "id": 451,
+        "name": "Laser Flip 180",
+        "difficulty": 37
+    },
+    {
+        "id": 452,
+        "name": "Laser Flip 360",
+        "difficulty": 76
+    },
+    {
+        "id": 453,
+        "name": "Laser Flip 540",
+        "difficulty": 4
+    },
+    {
+        "id": 454,
+        "name": "Laser Flip 720",
+        "difficulty": 88
+    },
+    {
+        "id": 455,
+        "name": "Laser Flip Over Gap",
+        "difficulty": 76
+    },
+    {
+        "id": 456,
+        "name": "Laser Flip Down Rail",
+        "difficulty": 79
+    },
+    {
+        "id": 457,
+        "name": "Laser Flip Down Stairs",
+        "difficulty": 30
+    },
+    {
+        "id": 458,
+        "name": "Laser Flip Manual",
+        "difficulty": 96
+    },
+    {
+        "id": 459,
+        "name": "Laser Flip Revert",
+        "difficulty": 46
+    },
+    {
+        "id": 460,
+        "name": "Laser Flip Body Varial",
+        "difficulty": 36
+    },
+    {
+        "id": 461,
+        "name": "Regular Casper Flip",
+        "difficulty": 99
+    },
+    {
+        "id": 462,
+        "name": "Fakie Casper Flip",
+        "difficulty": 14
+    },
+    {
+        "id": 463,
+        "name": "Switch Casper Flip",
+        "difficulty": 20
+    },
+    {
+        "id": 464,
+        "name": "Nollie Casper Flip",
+        "difficulty": 48
+    },
+    {
+        "id": 465,
+        "name": "Casper Flip to 50-50",
+        "difficulty": 59
+    },
+    {
+        "id": 466,
+        "name": "Casper Flip to 5-0",
+        "difficulty": 45
+    },
+    {
+        "id": 467,
+        "name": "Casper Flip to Nosegrind",
+        "difficulty": 52
+    },
+    {
+        "id": 468,
+        "name": "Casper Flip to Crooked",
+        "difficulty": 68
+    },
+    {
+        "id": 469,
+        "name": "Casper Flip to Smith",
+        "difficulty": 82
+    },
+    {
+        "id": 470,
+        "name": "Casper Flip to Feeble",
+        "difficulty": 99
+    },
+    {
+        "id": 471,
+        "name": "Casper Flip to Boardslide",
+        "difficulty": 20
+    },
+    {
+        "id": 472,
+        "name": "Casper Flip to Lipslide",
+        "difficulty": 18
+    },
+    {
+        "id": 473,
+        "name": "Casper Flip to Bluntslide",
+        "difficulty": 62
+    },
+    {
+        "id": 474,
+        "name": "Casper Flip 180",
+        "difficulty": 56
+    },
+    {
+        "id": 475,
+        "name": "Casper Flip 360",
+        "difficulty": 74
+    },
+    {
+        "id": 476,
+        "name": "Casper Flip 540",
+        "difficulty": 91
+    },
+    {
+        "id": 477,
+        "name": "Casper Flip 720",
+        "difficulty": 94
+    },
+    {
+        "id": 478,
+        "name": "Casper Flip Over Gap",
+        "difficulty": 100
+    },
+    {
+        "id": 479,
+        "name": "Casper Flip Down Rail",
+        "difficulty": 53
+    },
+    {
+        "id": 480,
+        "name": "Casper Flip Down Stairs",
+        "difficulty": 72
+    },
+    {
+        "id": 481,
+        "name": "Casper Flip Manual",
+        "difficulty": 9
+    },
+    {
+        "id": 482,
+        "name": "Casper Flip Revert",
+        "difficulty": 96
+    },
+    {
+        "id": 483,
+        "name": "Casper Flip Body Varial",
+        "difficulty": 81
+    },
+    {
+        "id": 484,
+        "name": "Regular Hospital Flip",
+        "difficulty": 98
+    },
+    {
+        "id": 485,
+        "name": "Fakie Hospital Flip",
+        "difficulty": 45
+    },
+    {
+        "id": 486,
+        "name": "Switch Hospital Flip",
+        "difficulty": 25
+    },
+    {
+        "id": 487,
+        "name": "Nollie Hospital Flip",
+        "difficulty": 38
+    },
+    {
+        "id": 488,
+        "name": "Hospital Flip to 50-50",
+        "difficulty": 34
+    },
+    {
+        "id": 489,
+        "name": "Hospital Flip to 5-0",
+        "difficulty": 83
+    },
+    {
+        "id": 490,
+        "name": "Hospital Flip to Nosegrind",
+        "difficulty": 86
+    },
+    {
+        "id": 491,
+        "name": "Hospital Flip to Crooked",
+        "difficulty": 2
+    },
+    {
+        "id": 492,
+        "name": "Hospital Flip to Smith",
+        "difficulty": 39
+    },
+    {
+        "id": 493,
+        "name": "Hospital Flip to Feeble",
+        "difficulty": 100
+    },
+    {
+        "id": 494,
+        "name": "Hospital Flip to Boardslide",
+        "difficulty": 96
+    },
+    {
+        "id": 495,
+        "name": "Hospital Flip to Lipslide",
+        "difficulty": 3
+    },
+    {
+        "id": 496,
+        "name": "Hospital Flip to Bluntslide",
+        "difficulty": 59
+    },
+    {
+        "id": 497,
+        "name": "Hospital Flip 180",
+        "difficulty": 3
+    },
+    {
+        "id": 498,
+        "name": "Hospital Flip 360",
+        "difficulty": 65
+    },
+    {
+        "id": 499,
+        "name": "Hospital Flip 540",
+        "difficulty": 95
+    },
+    {
+        "id": 500,
+        "name": "Hospital Flip 720",
+        "difficulty": 42
+    },
+    {
+        "id": 501,
+        "name": "Hospital Flip Over Gap",
+        "difficulty": 47
+    },
+    {
+        "id": 502,
+        "name": "Hospital Flip Down Rail",
+        "difficulty": 25
+    },
+    {
+        "id": 503,
+        "name": "Hospital Flip Down Stairs",
+        "difficulty": 23
+    },
+    {
+        "id": 504,
+        "name": "Hospital Flip Manual",
+        "difficulty": 38
+    },
+    {
+        "id": 505,
+        "name": "Hospital Flip Revert",
+        "difficulty": 86
+    },
+    {
+        "id": 506,
+        "name": "Hospital Flip Body Varial",
+        "difficulty": 83
+    },
+    {
+        "id": 507,
+        "name": "Regular Double Kickflip",
+        "difficulty": 89
+    },
+    {
+        "id": 508,
+        "name": "Fakie Double Kickflip",
+        "difficulty": 34
+    },
+    {
+        "id": 509,
+        "name": "Switch Double Kickflip",
+        "difficulty": 98
+    },
+    {
+        "id": 510,
+        "name": "Nollie Double Kickflip",
+        "difficulty": 55
+    },
+    {
+        "id": 511,
+        "name": "Double Kickflip to 50-50",
+        "difficulty": 85
+    },
+    {
+        "id": 512,
+        "name": "Double Kickflip to 5-0",
+        "difficulty": 23
+    },
+    {
+        "id": 513,
+        "name": "Double Kickflip to Nosegrind",
+        "difficulty": 65
+    },
+    {
+        "id": 514,
+        "name": "Double Kickflip to Crooked",
+        "difficulty": 90
+    },
+    {
+        "id": 515,
+        "name": "Double Kickflip to Smith",
+        "difficulty": 67
+    },
+    {
+        "id": 516,
+        "name": "Double Kickflip to Feeble",
+        "difficulty": 32
+    },
+    {
+        "id": 517,
+        "name": "Double Kickflip to Boardslide",
+        "difficulty": 84
+    },
+    {
+        "id": 518,
+        "name": "Double Kickflip to Lipslide",
+        "difficulty": 79
+    },
+    {
+        "id": 519,
+        "name": "Double Kickflip to Bluntslide",
+        "difficulty": 15
+    },
+    {
+        "id": 520,
+        "name": "Double Kickflip 180",
+        "difficulty": 62
+    },
+    {
+        "id": 521,
+        "name": "Double Kickflip 360",
+        "difficulty": 38
+    },
+    {
+        "id": 522,
+        "name": "Double Kickflip 540",
+        "difficulty": 65
+    },
+    {
+        "id": 523,
+        "name": "Double Kickflip 720",
+        "difficulty": 67
+    },
+    {
+        "id": 524,
+        "name": "Double Kickflip Over Gap",
+        "difficulty": 3
+    },
+    {
+        "id": 525,
+        "name": "Double Kickflip Down Rail",
+        "difficulty": 22
+    },
+    {
+        "id": 526,
+        "name": "Double Kickflip Down Stairs",
+        "difficulty": 3
+    },
+    {
+        "id": 527,
+        "name": "Double Kickflip Manual",
+        "difficulty": 4
+    },
+    {
+        "id": 528,
+        "name": "Double Kickflip Revert",
+        "difficulty": 47
+    },
+    {
+        "id": 529,
+        "name": "Double Kickflip Body Varial",
+        "difficulty": 59
+    },
+    {
+        "id": 530,
+        "name": "Regular Double Heelflip",
+        "difficulty": 60
+    },
+    {
+        "id": 531,
+        "name": "Fakie Double Heelflip",
+        "difficulty": 19
+    },
+    {
+        "id": 532,
+        "name": "Switch Double Heelflip",
+        "difficulty": 23
+    },
+    {
+        "id": 533,
+        "name": "Nollie Double Heelflip",
+        "difficulty": 50
+    },
+    {
+        "id": 534,
+        "name": "Double Heelflip to 50-50",
+        "difficulty": 93
+    },
+    {
+        "id": 535,
+        "name": "Double Heelflip to 5-0",
+        "difficulty": 11
+    },
+    {
+        "id": 536,
+        "name": "Double Heelflip to Nosegrind",
+        "difficulty": 53
+    },
+    {
+        "id": 537,
+        "name": "Double Heelflip to Crooked",
+        "difficulty": 43
+    },
+    {
+        "id": 538,
+        "name": "Double Heelflip to Smith",
+        "difficulty": 20
+    },
+    {
+        "id": 539,
+        "name": "Double Heelflip to Feeble",
+        "difficulty": 52
+    },
+    {
+        "id": 540,
+        "name": "Double Heelflip to Boardslide",
+        "difficulty": 82
+    },
+    {
+        "id": 541,
+        "name": "Double Heelflip to Lipslide",
+        "difficulty": 39
+    },
+    {
+        "id": 542,
+        "name": "Double Heelflip to Bluntslide",
+        "difficulty": 40
+    },
+    {
+        "id": 543,
+        "name": "Double Heelflip 180",
+        "difficulty": 9
+    },
+    {
+        "id": 544,
+        "name": "Double Heelflip 360",
+        "difficulty": 61
+    },
+    {
+        "id": 545,
+        "name": "Double Heelflip 540",
+        "difficulty": 21
+    },
+    {
+        "id": 546,
+        "name": "Double Heelflip 720",
+        "difficulty": 59
+    },
+    {
+        "id": 547,
+        "name": "Double Heelflip Over Gap",
+        "difficulty": 37
+    },
+    {
+        "id": 548,
+        "name": "Double Heelflip Down Rail",
+        "difficulty": 81
+    },
+    {
+        "id": 549,
+        "name": "Double Heelflip Down Stairs",
+        "difficulty": 25
+    },
+    {
+        "id": 550,
+        "name": "Double Heelflip Manual",
+        "difficulty": 77
+    },
+    {
+        "id": 551,
+        "name": "Double Heelflip Revert",
+        "difficulty": 54
+    },
+    {
+        "id": 552,
+        "name": "Double Heelflip Body Varial",
+        "difficulty": 41
+    },
+    {
+        "id": 553,
+        "name": "Regular Big Heel",
+        "difficulty": 83
+    },
+    {
+        "id": 554,
+        "name": "Fakie Big Heel",
+        "difficulty": 53
+    },
+    {
+        "id": 555,
+        "name": "Switch Big Heel",
+        "difficulty": 21
+    },
+    {
+        "id": 556,
+        "name": "Nollie Big Heel",
+        "difficulty": 16
+    },
+    {
+        "id": 557,
+        "name": "Big Heel to 50-50",
+        "difficulty": 67
+    },
+    {
+        "id": 558,
+        "name": "Big Heel to 5-0",
+        "difficulty": 4
+    },
+    {
+        "id": 559,
+        "name": "Big Heel to Nosegrind",
+        "difficulty": 14
+    },
+    {
+        "id": 560,
+        "name": "Big Heel to Crooked",
+        "difficulty": 89
+    },
+    {
+        "id": 561,
+        "name": "Big Heel to Smith",
+        "difficulty": 82
+    },
+    {
+        "id": 562,
+        "name": "Big Heel to Feeble",
+        "difficulty": 3
+    },
+    {
+        "id": 563,
+        "name": "Big Heel to Boardslide",
+        "difficulty": 53
+    },
+    {
+        "id": 564,
+        "name": "Big Heel to Lipslide",
+        "difficulty": 81
+    },
+    {
+        "id": 565,
+        "name": "Big Heel to Bluntslide",
+        "difficulty": 99
+    },
+    {
+        "id": 566,
+        "name": "Big Heel 180",
+        "difficulty": 72
+    },
+    {
+        "id": 567,
+        "name": "Big Heel 360",
+        "difficulty": 91
+    },
+    {
+        "id": 568,
+        "name": "Big Heel 540",
+        "difficulty": 82
+    },
+    {
+        "id": 569,
+        "name": "Big Heel 720",
+        "difficulty": 32
+    },
+    {
+        "id": 570,
+        "name": "Big Heel Over Gap",
+        "difficulty": 14
+    },
+    {
+        "id": 571,
+        "name": "Big Heel Down Rail",
+        "difficulty": 4
+    },
+    {
+        "id": 572,
+        "name": "Big Heel Down Stairs",
+        "difficulty": 36
+    },
+    {
+        "id": 573,
+        "name": "Big Heel Manual",
+        "difficulty": 92
+    },
+    {
+        "id": 574,
+        "name": "Big Heel Revert",
+        "difficulty": 10
+    },
+    {
+        "id": 575,
+        "name": "Big Heel Body Varial",
+        "difficulty": 60
+    },
+    {
+        "id": 576,
+        "name": "Regular Big Flip",
+        "difficulty": 3
+    },
+    {
+        "id": 577,
+        "name": "Fakie Big Flip",
+        "difficulty": 52
+    },
+    {
+        "id": 578,
+        "name": "Switch Big Flip",
+        "difficulty": 41
+    },
+    {
+        "id": 579,
+        "name": "Nollie Big Flip",
+        "difficulty": 90
+    },
+    {
+        "id": 580,
+        "name": "Big Flip to 50-50",
+        "difficulty": 79
+    },
+    {
+        "id": 581,
+        "name": "Big Flip to 5-0",
+        "difficulty": 71
+    },
+    {
+        "id": 582,
+        "name": "Big Flip to Nosegrind",
+        "difficulty": 1
+    },
+    {
+        "id": 583,
+        "name": "Big Flip to Crooked",
+        "difficulty": 13
+    },
+    {
+        "id": 584,
+        "name": "Big Flip to Smith",
+        "difficulty": 91
+    },
+    {
+        "id": 585,
+        "name": "Big Flip to Feeble",
+        "difficulty": 71
+    },
+    {
+        "id": 586,
+        "name": "Big Flip to Boardslide",
+        "difficulty": 40
+    },
+    {
+        "id": 587,
+        "name": "Big Flip to Lipslide",
+        "difficulty": 77
+    },
+    {
+        "id": 588,
+        "name": "Big Flip to Bluntslide",
+        "difficulty": 2
+    },
+    {
+        "id": 589,
+        "name": "Big Flip 180",
+        "difficulty": 41
+    },
+    {
+        "id": 590,
+        "name": "Big Flip 360",
+        "difficulty": 75
+    },
+    {
+        "id": 591,
+        "name": "Big Flip 540",
+        "difficulty": 53
+    },
+    {
+        "id": 592,
+        "name": "Big Flip 720",
+        "difficulty": 27
+    },
+    {
+        "id": 593,
+        "name": "Big Flip Over Gap",
+        "difficulty": 69
+    },
+    {
+        "id": 594,
+        "name": "Big Flip Down Rail",
+        "difficulty": 55
+    },
+    {
+        "id": 595,
+        "name": "Big Flip Down Stairs",
+        "difficulty": 47
+    },
+    {
+        "id": 596,
+        "name": "Big Flip Manual",
+        "difficulty": 9
+    },
+    {
+        "id": 597,
+        "name": "Big Flip Revert",
+        "difficulty": 37
+    },
+    {
+        "id": 598,
+        "name": "Big Flip Body Varial",
+        "difficulty": 5
+    },
+    {
+        "id": 599,
+        "name": "Regular Pressure Flip",
+        "difficulty": 88
+    },
+    {
+        "id": 600,
+        "name": "Fakie Pressure Flip",
+        "difficulty": 37
+    },
+    {
+        "id": 601,
+        "name": "Switch Pressure Flip",
+        "difficulty": 81
+    },
+    {
+        "id": 602,
+        "name": "Nollie Pressure Flip",
+        "difficulty": 9
+    },
+    {
+        "id": 603,
+        "name": "Pressure Flip to 50-50",
+        "difficulty": 86
+    },
+    {
+        "id": 604,
+        "name": "Pressure Flip to 5-0",
+        "difficulty": 98
+    },
+    {
+        "id": 605,
+        "name": "Pressure Flip to Nosegrind",
+        "difficulty": 36
+    },
+    {
+        "id": 606,
+        "name": "Pressure Flip to Crooked",
+        "difficulty": 87
+    },
+    {
+        "id": 607,
+        "name": "Pressure Flip to Smith",
+        "difficulty": 17
+    },
+    {
+        "id": 608,
+        "name": "Pressure Flip to Feeble",
+        "difficulty": 48
+    },
+    {
+        "id": 609,
+        "name": "Pressure Flip to Boardslide",
+        "difficulty": 61
+    },
+    {
+        "id": 610,
+        "name": "Pressure Flip to Lipslide",
+        "difficulty": 71
+    },
+    {
+        "id": 611,
+        "name": "Pressure Flip to Bluntslide",
+        "difficulty": 52
+    },
+    {
+        "id": 612,
+        "name": "Pressure Flip 180",
+        "difficulty": 10
+    },
+    {
+        "id": 613,
+        "name": "Pressure Flip 360",
+        "difficulty": 80
+    },
+    {
+        "id": 614,
+        "name": "Pressure Flip 540",
+        "difficulty": 14
+    },
+    {
+        "id": 615,
+        "name": "Pressure Flip 720",
+        "difficulty": 75
+    },
+    {
+        "id": 616,
+        "name": "Pressure Flip Over Gap",
+        "difficulty": 42
+    },
+    {
+        "id": 617,
+        "name": "Pressure Flip Down Rail",
+        "difficulty": 19
+    },
+    {
+        "id": 618,
+        "name": "Pressure Flip Down Stairs",
+        "difficulty": 29
+    },
+    {
+        "id": 619,
+        "name": "Pressure Flip Manual",
+        "difficulty": 34
+    },
+    {
+        "id": 620,
+        "name": "Pressure Flip Revert",
+        "difficulty": 100
+    },
+    {
+        "id": 621,
+        "name": "Pressure Flip Body Varial",
+        "difficulty": 37
+    },
+    {
+        "id": 622,
+        "name": "Regular Gazelle Flip",
+        "difficulty": 41
+    },
+    {
+        "id": 623,
+        "name": "Fakie Gazelle Flip",
+        "difficulty": 79
+    },
+    {
+        "id": 624,
+        "name": "Switch Gazelle Flip",
+        "difficulty": 14
+    },
+    {
+        "id": 625,
+        "name": "Nollie Gazelle Flip",
+        "difficulty": 80
+    },
+    {
+        "id": 626,
+        "name": "Gazelle Flip to 50-50",
+        "difficulty": 84
+    },
+    {
+        "id": 627,
+        "name": "Gazelle Flip to 5-0",
+        "difficulty": 92
+    },
+    {
+        "id": 628,
+        "name": "Gazelle Flip to Nosegrind",
+        "difficulty": 65
+    },
+    {
+        "id": 629,
+        "name": "Gazelle Flip to Crooked",
+        "difficulty": 56
+    },
+    {
+        "id": 630,
+        "name": "Gazelle Flip to Smith",
+        "difficulty": 29
+    },
+    {
+        "id": 631,
+        "name": "Gazelle Flip to Feeble",
+        "difficulty": 76
+    },
+    {
+        "id": 632,
+        "name": "Gazelle Flip to Boardslide",
+        "difficulty": 14
+    },
+    {
+        "id": 633,
+        "name": "Gazelle Flip to Lipslide",
+        "difficulty": 86
+    },
+    {
+        "id": 634,
+        "name": "Gazelle Flip to Bluntslide",
+        "difficulty": 70
+    },
+    {
+        "id": 635,
+        "name": "Gazelle Flip 180",
+        "difficulty": 9
+    },
+    {
+        "id": 636,
+        "name": "Gazelle Flip 360",
+        "difficulty": 33
+    },
+    {
+        "id": 637,
+        "name": "Gazelle Flip 540",
+        "difficulty": 98
+    },
+    {
+        "id": 638,
+        "name": "Gazelle Flip 720",
+        "difficulty": 57
+    },
+    {
+        "id": 639,
+        "name": "Gazelle Flip Over Gap",
+        "difficulty": 48
+    },
+    {
+        "id": 640,
+        "name": "Gazelle Flip Down Rail",
+        "difficulty": 18
+    },
+    {
+        "id": 641,
+        "name": "Gazelle Flip Down Stairs",
+        "difficulty": 82
+    },
+    {
+        "id": 642,
+        "name": "Gazelle Flip Manual",
+        "difficulty": 13
+    },
+    {
+        "id": 643,
+        "name": "Gazelle Flip Revert",
+        "difficulty": 68
+    },
+    {
+        "id": 644,
+        "name": "Gazelle Flip Body Varial",
+        "difficulty": 86
+    },
+    {
+        "id": 645,
+        "name": "Regular Dolphin Flip",
+        "difficulty": 44
+    },
+    {
+        "id": 646,
+        "name": "Fakie Dolphin Flip",
+        "difficulty": 45
+    },
+    {
+        "id": 647,
+        "name": "Switch Dolphin Flip",
+        "difficulty": 41
+    },
+    {
+        "id": 648,
+        "name": "Nollie Dolphin Flip",
+        "difficulty": 83
+    },
+    {
+        "id": 649,
+        "name": "Dolphin Flip to 50-50",
+        "difficulty": 95
+    },
+    {
+        "id": 650,
+        "name": "Dolphin Flip to 5-0",
+        "difficulty": 33
+    },
+    {
+        "id": 651,
+        "name": "Dolphin Flip to Nosegrind",
+        "difficulty": 7
+    },
+    {
+        "id": 652,
+        "name": "Dolphin Flip to Crooked",
+        "difficulty": 4
+    },
+    {
+        "id": 653,
+        "name": "Dolphin Flip to Smith",
+        "difficulty": 23
+    },
+    {
+        "id": 654,
+        "name": "Dolphin Flip to Feeble",
+        "difficulty": 64
+    },
+    {
+        "id": 655,
+        "name": "Dolphin Flip to Boardslide",
+        "difficulty": 59
+    },
+    {
+        "id": 656,
+        "name": "Dolphin Flip to Lipslide",
+        "difficulty": 43
+    },
+    {
+        "id": 657,
+        "name": "Dolphin Flip to Bluntslide",
+        "difficulty": 59
+    },
+    {
+        "id": 658,
+        "name": "Dolphin Flip 180",
+        "difficulty": 69
+    },
+    {
+        "id": 659,
+        "name": "Dolphin Flip 360",
+        "difficulty": 92
+    },
+    {
+        "id": 660,
+        "name": "Dolphin Flip 540",
+        "difficulty": 59
+    },
+    {
+        "id": 661,
+        "name": "Dolphin Flip 720",
+        "difficulty": 44
+    },
+    {
+        "id": 662,
+        "name": "Dolphin Flip Over Gap",
+        "difficulty": 13
+    },
+    {
+        "id": 663,
+        "name": "Dolphin Flip Down Rail",
+        "difficulty": 30
+    },
+    {
+        "id": 664,
+        "name": "Dolphin Flip Down Stairs",
+        "difficulty": 39
+    },
+    {
+        "id": 665,
+        "name": "Dolphin Flip Manual",
+        "difficulty": 74
+    },
+    {
+        "id": 666,
+        "name": "Dolphin Flip Revert",
+        "difficulty": 24
+    },
+    {
+        "id": 667,
+        "name": "Dolphin Flip Body Varial",
+        "difficulty": 77
+    },
+    {
+        "id": 668,
+        "name": "Regular Macho Flip",
+        "difficulty": 54
+    },
+    {
+        "id": 669,
+        "name": "Fakie Macho Flip",
+        "difficulty": 52
+    },
+    {
+        "id": 670,
+        "name": "Switch Macho Flip",
+        "difficulty": 57
+    },
+    {
+        "id": 671,
+        "name": "Nollie Macho Flip",
+        "difficulty": 97
+    },
+    {
+        "id": 672,
+        "name": "Macho Flip to 50-50",
+        "difficulty": 95
+    },
+    {
+        "id": 673,
+        "name": "Macho Flip to 5-0",
+        "difficulty": 21
+    },
+    {
+        "id": 674,
+        "name": "Macho Flip to Nosegrind",
+        "difficulty": 64
+    },
+    {
+        "id": 675,
+        "name": "Macho Flip to Crooked",
+        "difficulty": 60
+    },
+    {
+        "id": 676,
+        "name": "Macho Flip to Smith",
+        "difficulty": 64
+    },
+    {
+        "id": 677,
+        "name": "Macho Flip to Feeble",
+        "difficulty": 15
+    },
+    {
+        "id": 678,
+        "name": "Macho Flip to Boardslide",
+        "difficulty": 54
+    },
+    {
+        "id": 679,
+        "name": "Macho Flip to Lipslide",
+        "difficulty": 6
+    },
+    {
+        "id": 680,
+        "name": "Macho Flip to Bluntslide",
+        "difficulty": 23
+    },
+    {
+        "id": 681,
+        "name": "Macho Flip 180",
+        "difficulty": 27
+    },
+    {
+        "id": 682,
+        "name": "Macho Flip 360",
+        "difficulty": 98
+    },
+    {
+        "id": 683,
+        "name": "Macho Flip 540",
+        "difficulty": 97
+    },
+    {
+        "id": 684,
+        "name": "Macho Flip 720",
+        "difficulty": 46
+    },
+    {
+        "id": 685,
+        "name": "Macho Flip Over Gap",
+        "difficulty": 36
+    },
+    {
+        "id": 686,
+        "name": "Macho Flip Down Rail",
+        "difficulty": 100
+    },
+    {
+        "id": 687,
+        "name": "Macho Flip Down Stairs",
+        "difficulty": 76
+    },
+    {
+        "id": 688,
+        "name": "Macho Flip Manual",
+        "difficulty": 33
+    },
+    {
+        "id": 689,
+        "name": "Macho Flip Revert",
+        "difficulty": 90
+    },
+    {
+        "id": 690,
+        "name": "Macho Flip Body Varial",
+        "difficulty": 59
+    },
+    {
+        "id": 691,
+        "name": "Regular Darkslide",
+        "difficulty": 58
+    },
+    {
+        "id": 692,
+        "name": "Fakie Darkslide",
+        "difficulty": 77
+    },
+    {
+        "id": 693,
+        "name": "Switch Darkslide",
+        "difficulty": 89
+    },
+    {
+        "id": 694,
+        "name": "Nollie Darkslide",
+        "difficulty": 62
+    },
+    {
+        "id": 695,
+        "name": "Darkslide to 50-50",
+        "difficulty": 59
+    },
+    {
+        "id": 696,
+        "name": "Darkslide to 5-0",
+        "difficulty": 5
+    },
+    {
+        "id": 697,
+        "name": "Darkslide to Nosegrind",
+        "difficulty": 98
+    },
+    {
+        "id": 698,
+        "name": "Darkslide to Crooked",
+        "difficulty": 37
+    },
+    {
+        "id": 699,
+        "name": "Darkslide to Smith",
+        "difficulty": 74
+    },
+    {
+        "id": 700,
+        "name": "Darkslide to Feeble",
+        "difficulty": 45
+    },
+    {
+        "id": 701,
+        "name": "Darkslide to Boardslide",
+        "difficulty": 12
+    },
+    {
+        "id": 702,
+        "name": "Darkslide to Lipslide",
+        "difficulty": 28
+    },
+    {
+        "id": 703,
+        "name": "Darkslide to Bluntslide",
+        "difficulty": 97
+    },
+    {
+        "id": 704,
+        "name": "Darkslide 180",
+        "difficulty": 7
+    },
+    {
+        "id": 705,
+        "name": "Darkslide 360",
+        "difficulty": 84
+    },
+    {
+        "id": 706,
+        "name": "Darkslide 540",
+        "difficulty": 50
+    },
+    {
+        "id": 707,
+        "name": "Darkslide 720",
+        "difficulty": 52
+    },
+    {
+        "id": 708,
+        "name": "Darkslide Over Gap",
+        "difficulty": 89
+    },
+    {
+        "id": 709,
+        "name": "Darkslide Down Rail",
+        "difficulty": 82
+    },
+    {
+        "id": 710,
+        "name": "Darkslide Down Stairs",
+        "difficulty": 32
+    },
+    {
+        "id": 711,
+        "name": "Darkslide Manual",
+        "difficulty": 19
+    },
+    {
+        "id": 712,
+        "name": "Darkslide Revert",
+        "difficulty": 97
+    },
+    {
+        "id": 713,
+        "name": "Darkslide Body Varial",
+        "difficulty": 4
+    },
+    {
+        "id": 714,
+        "name": "Regular Primo Flip",
+        "difficulty": 46
+    },
+    {
+        "id": 715,
+        "name": "Fakie Primo Flip",
+        "difficulty": 50
+    },
+    {
+        "id": 716,
+        "name": "Switch Primo Flip",
+        "difficulty": 59
+    },
+    {
+        "id": 717,
+        "name": "Nollie Primo Flip",
+        "difficulty": 96
+    },
+    {
+        "id": 718,
+        "name": "Primo Flip to 50-50",
+        "difficulty": 60
+    },
+    {
+        "id": 719,
+        "name": "Primo Flip to 5-0",
+        "difficulty": 14
+    },
+    {
+        "id": 720,
+        "name": "Primo Flip to Nosegrind",
+        "difficulty": 9
+    },
+    {
+        "id": 721,
+        "name": "Primo Flip to Crooked",
+        "difficulty": 1
+    },
+    {
+        "id": 722,
+        "name": "Primo Flip to Smith",
+        "difficulty": 4
+    },
+    {
+        "id": 723,
+        "name": "Primo Flip to Feeble",
+        "difficulty": 35
+    },
+    {
+        "id": 724,
+        "name": "Primo Flip to Boardslide",
+        "difficulty": 10
+    },
+    {
+        "id": 725,
+        "name": "Primo Flip to Lipslide",
+        "difficulty": 69
+    },
+    {
+        "id": 726,
+        "name": "Primo Flip to Bluntslide",
+        "difficulty": 51
+    },
+    {
+        "id": 727,
+        "name": "Primo Flip 180",
+        "difficulty": 79
+    },
+    {
+        "id": 728,
+        "name": "Primo Flip 360",
+        "difficulty": 24
+    },
+    {
+        "id": 729,
+        "name": "Primo Flip 540",
+        "difficulty": 61
+    },
+    {
+        "id": 730,
+        "name": "Primo Flip 720",
+        "difficulty": 16
+    },
+    {
+        "id": 731,
+        "name": "Primo Flip Over Gap",
+        "difficulty": 76
+    },
+    {
+        "id": 732,
+        "name": "Primo Flip Down Rail",
+        "difficulty": 99
+    },
+    {
+        "id": 733,
+        "name": "Primo Flip Down Stairs",
+        "difficulty": 71
+    },
+    {
+        "id": 734,
+        "name": "Primo Flip Manual",
+        "difficulty": 28
+    },
+    {
+        "id": 735,
+        "name": "Primo Flip Revert",
+        "difficulty": 47
+    },
+    {
+        "id": 736,
+        "name": "Primo Flip Body Varial",
+        "difficulty": 31
+    },
+    {
+        "id": 737,
+        "name": "Regular Finger Flip",
+        "difficulty": 20
+    },
+    {
+        "id": 738,
+        "name": "Fakie Finger Flip",
+        "difficulty": 41
+    },
+    {
+        "id": 739,
+        "name": "Switch Finger Flip",
+        "difficulty": 12
+    },
+    {
+        "id": 740,
+        "name": "Nollie Finger Flip",
+        "difficulty": 70
+    },
+    {
+        "id": 741,
+        "name": "Finger Flip to 50-50",
+        "difficulty": 56
+    },
+    {
+        "id": 742,
+        "name": "Finger Flip to 5-0",
+        "difficulty": 31
+    },
+    {
+        "id": 743,
+        "name": "Finger Flip to Nosegrind",
+        "difficulty": 9
+    },
+    {
+        "id": 744,
+        "name": "Finger Flip to Crooked",
+        "difficulty": 70
+    },
+    {
+        "id": 745,
+        "name": "Finger Flip to Smith",
+        "difficulty": 46
+    },
+    {
+        "id": 746,
+        "name": "Finger Flip to Feeble",
+        "difficulty": 29
+    },
+    {
+        "id": 747,
+        "name": "Finger Flip to Boardslide",
+        "difficulty": 20
+    },
+    {
+        "id": 748,
+        "name": "Finger Flip to Lipslide",
+        "difficulty": 97
+    },
+    {
+        "id": 749,
+        "name": "Finger Flip to Bluntslide",
+        "difficulty": 16
+    },
+    {
+        "id": 750,
+        "name": "Finger Flip 180",
+        "difficulty": 96
+    },
+    {
+        "id": 751,
+        "name": "Finger Flip 360",
+        "difficulty": 46
+    },
+    {
+        "id": 752,
+        "name": "Finger Flip 540",
+        "difficulty": 68
+    },
+    {
+        "id": 753,
+        "name": "Finger Flip 720",
+        "difficulty": 8
+    },
+    {
+        "id": 754,
+        "name": "Finger Flip Over Gap",
+        "difficulty": 56
+    },
+    {
+        "id": 755,
+        "name": "Finger Flip Down Rail",
+        "difficulty": 88
+    },
+    {
+        "id": 756,
+        "name": "Finger Flip Down Stairs",
+        "difficulty": 32
+    },
+    {
+        "id": 757,
+        "name": "Finger Flip Manual",
+        "difficulty": 37
+    },
+    {
+        "id": 758,
+        "name": "Finger Flip Revert",
+        "difficulty": 47
+    },
+    {
+        "id": 759,
+        "name": "Finger Flip Body Varial",
+        "difficulty": 73
+    },
+    {
+        "id": 760,
+        "name": "Regular Boneless",
+        "difficulty": 27
+    },
+    {
+        "id": 761,
+        "name": "Fakie Boneless",
+        "difficulty": 53
+    },
+    {
+        "id": 762,
+        "name": "Switch Boneless",
+        "difficulty": 66
+    },
+    {
+        "id": 763,
+        "name": "Nollie Boneless",
+        "difficulty": 51
+    },
+    {
+        "id": 764,
+        "name": "Boneless to 50-50",
+        "difficulty": 95
+    },
+    {
+        "id": 765,
+        "name": "Boneless to 5-0",
+        "difficulty": 51
+    },
+    {
+        "id": 766,
+        "name": "Boneless to Nosegrind",
+        "difficulty": 80
+    },
+    {
+        "id": 767,
+        "name": "Boneless to Crooked",
+        "difficulty": 85
+    },
+    {
+        "id": 768,
+        "name": "Boneless to Smith",
+        "difficulty": 37
+    },
+    {
+        "id": 769,
+        "name": "Boneless to Feeble",
+        "difficulty": 63
+    },
+    {
+        "id": 770,
+        "name": "Boneless to Boardslide",
+        "difficulty": 100
+    },
+    {
+        "id": 771,
+        "name": "Boneless to Lipslide",
+        "difficulty": 59
+    },
+    {
+        "id": 772,
+        "name": "Boneless to Bluntslide",
+        "difficulty": 67
+    },
+    {
+        "id": 773,
+        "name": "Boneless 180",
+        "difficulty": 1
+    },
+    {
+        "id": 774,
+        "name": "Boneless 360",
+        "difficulty": 48
+    },
+    {
+        "id": 775,
+        "name": "Boneless 540",
+        "difficulty": 52
+    },
+    {
+        "id": 776,
+        "name": "Boneless 720",
+        "difficulty": 75
+    },
+    {
+        "id": 777,
+        "name": "Boneless Over Gap",
+        "difficulty": 20
+    },
+    {
+        "id": 778,
+        "name": "Boneless Down Rail",
+        "difficulty": 87
+    },
+    {
+        "id": 779,
+        "name": "Boneless Down Stairs",
+        "difficulty": 36
+    },
+    {
+        "id": 780,
+        "name": "Boneless Manual",
+        "difficulty": 32
+    },
+    {
+        "id": 781,
+        "name": "Boneless Revert",
+        "difficulty": 12
+    },
+    {
+        "id": 782,
+        "name": "Boneless Body Varial",
+        "difficulty": 98
+    },
+    {
+        "id": 783,
+        "name": "Regular No Comply",
+        "difficulty": 4
+    },
+    {
+        "id": 784,
+        "name": "Fakie No Comply",
+        "difficulty": 62
+    },
+    {
+        "id": 785,
+        "name": "Switch No Comply",
+        "difficulty": 2
+    },
+    {
+        "id": 786,
+        "name": "Nollie No Comply",
+        "difficulty": 33
+    },
+    {
+        "id": 787,
+        "name": "No Comply to 50-50",
+        "difficulty": 41
+    },
+    {
+        "id": 788,
+        "name": "No Comply to 5-0",
+        "difficulty": 19
+    },
+    {
+        "id": 789,
+        "name": "No Comply to Nosegrind",
+        "difficulty": 63
+    },
+    {
+        "id": 790,
+        "name": "No Comply to Crooked",
+        "difficulty": 77
+    },
+    {
+        "id": 791,
+        "name": "No Comply to Smith",
+        "difficulty": 35
+    },
+    {
+        "id": 792,
+        "name": "No Comply to Feeble",
+        "difficulty": 87
+    },
+    {
+        "id": 793,
+        "name": "No Comply to Boardslide",
+        "difficulty": 64
+    },
+    {
+        "id": 794,
+        "name": "No Comply to Lipslide",
+        "difficulty": 56
+    },
+    {
+        "id": 795,
+        "name": "No Comply to Bluntslide",
+        "difficulty": 44
+    },
+    {
+        "id": 796,
+        "name": "No Comply 180",
+        "difficulty": 58
+    },
+    {
+        "id": 797,
+        "name": "No Comply 360",
+        "difficulty": 91
+    },
+    {
+        "id": 798,
+        "name": "No Comply 540",
+        "difficulty": 56
+    },
+    {
+        "id": 799,
+        "name": "No Comply 720",
+        "difficulty": 25
+    },
+    {
+        "id": 800,
+        "name": "No Comply Over Gap",
+        "difficulty": 93
+    },
+    {
+        "id": 801,
+        "name": "No Comply Down Rail",
+        "difficulty": 26
+    },
+    {
+        "id": 802,
+        "name": "No Comply Down Stairs",
+        "difficulty": 12
+    },
+    {
+        "id": 803,
+        "name": "No Comply Manual",
+        "difficulty": 97
+    },
+    {
+        "id": 804,
+        "name": "No Comply Revert",
+        "difficulty": 48
+    },
+    {
+        "id": 805,
+        "name": "No Comply Body Varial",
+        "difficulty": 61
+    }
+]

@@ -2,16 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:skate_community/screens/chat/chat_screen.dart';
-import 'package:skate_community/screens/sesions/sesion_screen.dart';
 import 'package:skate_community/screens/settings/settings_sreen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-import 'package:skate_community/screens/friends/friends_list_screen.dart';
-import 'package:skate_community/screens/auth/sign_in_screen.dart';
 import 'package:skate_community/screens/park/skatepark_detail_screen.dart';
 import 'package:skate_community/services/skatepark_service.dart';
+import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -117,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
           position: LatLng(park['latitude'], park['longitude']),
           infoWindow: InfoWindow(
             title: park['name'],
-            snippet: '📍 ${park['address'] ?? 'Geen adres beschikbaar'}',
             onTap: () {
               Navigator.push(
                 context,
@@ -184,101 +179,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 Colors.transparent, // Transparant om de gradient te tonen
             elevation: 0, // Verwijder schaduw
             actions: [
+              // IconButton(
+              //   icon: Icon(Icons.logout,
+              //       color: Colors.white), // Witte kleur voor icoon
+              //   onPressed: () async {
+              //     await Supabase.instance.client.auth.signOut();
+              //     Navigator.pushReplacement(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => SignInScreen()),
+              //     );
+              //   },
+              // ),
               IconButton(
-                icon: Icon(Icons.logout,
-                    color: Colors.white), // Witte kleur voor icoon
-                onPressed: () async {
-                  await Supabase.instance.client.auth.signOut();
+                icon: Icon(Icons.settings, color: Colors.white),
+                onPressed: () {
                   Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()),
-                  );
-                },
-              ),
-            ],
-            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
-          ),
-        ),
-      ),
-      drawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                child: Center(
-                  child: Text(
-                    'Skate Flow',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Raleway',
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.map, color: Colors.white), // Witte icoon
-                title: Text('Home',
-                    style: TextStyle(color: Colors.white)), // Witte tekst
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.group, color: Colors.white),
-                title: Text('Vrienden', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FriendsListScreen()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.chat, color: Colors.white),
-                title: Text('Chat', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChatScreen()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.alarm_rounded, color: Colors.white),
-                title: Text('Sessies', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SessionScreen()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings, color: Colors.white),
-                title:
-                    Text('Instellingen', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SettingsScreen()),
                   );
                 },
-              ),
+              )
             ],
+            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
           ),
         ),
       ),
@@ -306,15 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _fetchSkateparks,
-        backgroundColor: Color(0xFF0C1033), // Gebruik een accentkleur
-        tooltip: 'Ververs Skateparken',
-        child: Icon(
-          Icons.refresh,
-          color: Colors.white, // Witte icoonkleur
-          ),
-      ),
+      bottomNavigationBar: FooterWidget(currentIndex: 0),
     );
   }
 }

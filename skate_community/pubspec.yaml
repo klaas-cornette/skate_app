@@ -46,6 +46,7 @@ dependencies:
     cupertino_icons: ^1.0.8
     google_sign_in: ^6.2.2
     intl: ^0.20.1
+    shared_preferences: ^2.5.2
 
 dev_dependencies:
     flutter_test:
@@ -113,6 +114,7 @@ flutter:
     assets:
         - assets/images/marker.png
         - assets/images/skate-back.jpg
+        - assets/store/skate-tricks.json
     # The following line ensures that the Material Icons font is
     # included with your application, so that you can use the icons in
     # the material Icons class.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -46,6 +47,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: FooterWidget(currentIndex: 5),
     );
   }
 }

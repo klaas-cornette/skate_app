@@ -6,6 +6,7 @@ import 'package:skate_community/screens/widgets/friend_list_widget.dart';
 import 'package:skate_community/screens/widgets/friend_requests_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
 import 'package:skate_community/services/chat_service.dart';
+import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class FriendsListScreen extends StatefulWidget {
   const FriendsListScreen({super.key});
@@ -167,6 +168,7 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
           color: Colors.white,
           ),
       ),
+      bottomNavigationBar: FooterWidget(currentIndex: 1),
     );
   }
 }

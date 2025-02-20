@@ -5,6 +5,7 @@ import 'package:skate_community/screens/friends/friends_list_screen.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
+import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -169,6 +170,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: _buildChatList(),
         ),
       ),
+      bottomNavigationBar: FooterWidget(currentIndex: 2),
     );
   }
 }

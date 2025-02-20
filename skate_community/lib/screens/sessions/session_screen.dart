@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:skate_community/services/sesion_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class SessionScreen extends StatefulWidget {
   const SessionScreen({super.key});
@@ -272,6 +273,7 @@ class _SessionScreenState extends State<SessionScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: FooterWidget(currentIndex: 3),
     );
   }
 }
