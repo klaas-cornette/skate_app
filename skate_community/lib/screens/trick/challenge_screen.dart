@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skate_community/services/trick_service.dart';
 import 'package:skate_community/screens/widgets/footer_widget.dart';
 
@@ -12,6 +13,7 @@ class ChallengeScreen extends StatefulWidget {
 class _ChallengeScreenState extends State<ChallengeScreen> {
   final TrickService trickService = TrickService();
   List<Map<String, dynamic>> dailyChallenges = [];
+  bool _isLoading = false; // Loading state
 
   @override
   void initState() {
@@ -20,18 +22,68 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
   }
 
   Future<void> loadChallenges() async {
-  try {
-    final response = await trickService.getDailyChallenges();
-    if (mounted) { // Check of widget nog bestaat voordat je setState aanroept
-      setState(() {
-        dailyChallenges = response;
-      });
-    }
-  } catch (e) {
-    print("❌ Fout bij het laden van uitdagingen: $e");
-  }
-}
+    setState(() {
+      _isLoading = true; // Start loading
+    });
 
+    try {
+      final response = await trickService.getDailyChallenges();
+      if (mounted) {
+        setState(() {
+          dailyChallenges = response;
+        });
+      }
+    } catch (e) {
+      print("Fout bij het laden van uitdagingen: $e");
+    }
+    setState(() {
+      _isLoading = false; // Stop loading
+    });
+  }
+
+  Future<void> toggleChallenge(
+      String challengeId, String trickName, int points) async {
+    final challenge = await trickService.getActiveChallengById(challengeId);
+
+    if (challenge['completed']) {
+      await removeChallenge(challengeId);
+    } else {
+      await addChallenge(challengeId, trickName, points);
+    }
+    await loadChallenges();
+    setState(() {
+    _isLoading = false; // Stop loading
+  });
+  }
+
+  Future<void> addChallenge(
+      String challengeId, String trickName, int points) async {
+    try {
+      await trickService.addUserChallenge(challengeId, trickName, points);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Challenge "$trickName" toegevoegd!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } catch (e) {
+      print("Fout bij het toevoegen van challenge: $e");
+    }
+  }
+
+  Future<void> removeChallenge(String challengeId) async {
+    try {
+      await trickService.removeUserChallenge(challengeId);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Challenge verwijderd!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } catch (e) {
+      print("Fout bij het verwijderen van challenge: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +113,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
           ),
         ),
       ),
-      body: dailyChallenges.isEmpty
+      body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: dailyChallenges.length,
@@ -70,12 +122,21 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 return Card(
                   margin: EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text(trick['name'],
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    subtitle: Text("Moeilijkheid: ${trick['difficulty']}"),
-                    trailing:
-                        Icon(Icons.check_circle_outline, color: Colors.green),
+                    title: Text(
+                      trick['name'],
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text("Punten: ${trick['points']}"),
+                    trailing: Icon(
+                      Icons.check_circle_outline,
+                      color: trick["completed"] ? Colors.green : Colors.red,
+                    ),
+                    onTap: () {
+                      int points = trick['points'].toInt();
+                      toggleChallenge(
+                          trick['trick_id'].toString(), trick['name'], points);
+                    },
                   ),
                 );
               },

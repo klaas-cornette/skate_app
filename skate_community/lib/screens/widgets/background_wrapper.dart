@@ -16,7 +16,7 @@ class BackgroundWrapper extends StatelessWidget {
               height: constraints.maxHeight, // Gebruik maximale hoogte
               width: constraints.maxWidth,   // Gebruik maximale breedte
               child: Opacity(
-                opacity: 0.65, // Transparantie van de achtergrondafbeelding
+                opacity: 0.25, // Transparantie van de achtergrondafbeelding
                 child: Image.asset(
                   'assets/images/skate-back.jpg', 
                   repeat: ImageRepeat.repeatY, // Herhaal afbeelding verticaal
