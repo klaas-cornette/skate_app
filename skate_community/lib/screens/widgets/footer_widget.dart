@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skate_community/screens/home_screen.dart';
 import 'package:skate_community/screens/friends/friends_list_screen.dart';
 import 'package:skate_community/screens/chat/chat_screen.dart';
-import 'package:skate_community/screens/sessions/session_screen.dart';
+import 'package:skate_community/screens/sessions/session_list_screen.dart';
 import 'package:skate_community/screens/trick/challenge_screen.dart';
 
 
@@ -17,24 +17,19 @@ class FooterWidget extends StatelessWidget {
 
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
         break;
       case 1:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => FriendsListScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FriendsListScreen()));
         break;
       case 2:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ChatScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatScreen()));
         break;
       case 3:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SessionScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SessionListScreen()));
         break;
       case 4:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ChallengeScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChallengeScreen()));
         break;
     }
   }
@@ -62,7 +57,6 @@ class FooterWidget extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: "Sessies"),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: "challenges"),
-          
         ],
       ),
     );

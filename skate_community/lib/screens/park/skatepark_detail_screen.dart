@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/detail_card_widget.dart';
+import 'package:skate_community/screens/widgets/detail_list_widget.dart';
 import 'package:skate_community/screens/widgets/foto_section_widget.dart';
 import 'package:skate_community/screens/widgets/session_list_widget.dart';
 import 'package:skate_community/services/skatepark_service.dart';
@@ -96,11 +96,10 @@ class _SkateparkDetailScreenState extends State<SkateparkDetailScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const SizedBox(height: 10),
                         PhotoSection(
                           imageUrl: skatepark?['imageUrl'],
                         ),
-                        DetailCard(skatepark: skatepark),
+                        DetailList(skatepark: skatepark),
                         Card(
                           color: Color(0xFF9AC4F5), // Nieuwe achtergrondkleur
                           child: SizedBox(

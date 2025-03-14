@@ -26,6 +26,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _loadSettings();
   }
 
+  
+
   /// Laadt de huidige instellingen van de gebruiker uit de 'user_settings' tabel
   Future<void> _loadSettings() async {
     try {

@@ -1,6 +1,7 @@
 // session_screen.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:skate_community/screens/sessions/session_list_screen.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:skate_community/services/sesion_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -69,8 +70,7 @@ class _SessionScreenState extends State<SessionScreen> {
   }
 
   String _combineDateAndTime(DateTime date, TimeOfDay time) {
-    final dt =
-        DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    final dt = DateTime(date.year, date.month, date.day, time.hour, time.minute);
     final utcDateTime = dt.toUtc(); // Zet om naar UTC
     return DateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS'Z'").format(utcDateTime);
   }
@@ -86,12 +86,12 @@ class _SessionScreenState extends State<SessionScreen> {
     final startTime = _combineDateAndTime(_selectedDate, _startTime);
     final endTime = _combineDateAndTime(_selectedDate, _endTime);
 
-    if (startTime.compareTo(endTime) >= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Eindtijd moet na de starttijd zijn!')),
-      );
-      return;
-    }
+    // if (startTime.compareTo(endTime) >= 0) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('Eindtijd moet na de starttijd zijn!')),
+    //   );
+    //   return;
+    // }
 
     if (DateTime.now().compareTo(DateTime.parse(startTime)) >= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -107,15 +107,12 @@ class _SessionScreenState extends State<SessionScreen> {
       return;
     }
 
-    if (DateTime.parse(endTime)
-            .difference(DateTime.parse(startTime))
-            .inMinutes <
-        30) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Sessie moet minimaal 30 minuten duren!')),
-      );
-      return;
-    }
+    // if (DateTime.parse(endTime).difference(DateTime.parse(startTime)).inMinutes < 30) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('Sessie moet minimaal 30 minuten duren!')),
+    //   );
+    //   return;
+    // }
 
     await _sesionService.createSession(startTime, endTime, _selectedSkatepark!);
 
@@ -128,6 +125,11 @@ class _SessionScreenState extends State<SessionScreen> {
       _endTime = TimeOfDay.now();
       _selectedSkatepark = null;
     });
+
+     Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SessionListScreen()),
+    );
   }
 
   @override
@@ -144,7 +146,6 @@ class _SessionScreenState extends State<SessionScreen> {
             ),
           ),
           child: AppBar(
-            automaticallyImplyLeading: false,
             title: const Text(
               'Nieuwe Sessie',
               style: TextStyle(
