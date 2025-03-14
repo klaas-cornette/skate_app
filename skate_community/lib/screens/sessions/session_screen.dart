@@ -144,6 +144,7 @@ class _SessionScreenState extends State<SessionScreen> {
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Nieuwe Sessie',
               style: TextStyle(

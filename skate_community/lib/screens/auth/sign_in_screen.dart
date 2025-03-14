@@ -1,6 +1,7 @@
 // lib/screens/sign_in_screen.dart
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/auth/sign_up_screen.dart';
+import 'package:skate_community/screens/home_screen.dart';
 import '../../services/auth_service.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -32,6 +33,10 @@ class _SignInScreenState extends State<SignInScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Logged in successfully!')),
         );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,16 +53,17 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: const Size.fromHeight(60.0), // Stel de hoogte in
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              colors: [const Color(0xFF0C1033), const Color(0xFF9AC4F5)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false, // Verwijdert de back arrow
             title: const Text(
               'Sign In',
               style: TextStyle(
@@ -81,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                'Welcome Back!',
+                'Welkom Terug!',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -93,13 +99,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                       color: Color(0xFF0C1033)), // Consistente labelkleur
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
+                    borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -108,12 +114,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
+                  labelStyle: const TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
+                    borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
                 obscureText: true,
@@ -126,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor:
-                            Color(0xFF0C1033), // Knoopkleur in thema
+                            const Color(0xFF0C1033), // Knoopkleur in thema
                         foregroundColor: Colors.white, // Witte tekst
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

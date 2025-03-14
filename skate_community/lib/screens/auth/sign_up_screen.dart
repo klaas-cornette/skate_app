@@ -1,5 +1,7 @@
+// lib/screens/sign_up_screen.dart
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/home_screen.dart';
+import 'package:skate_community/screens/auth/sign_in_screen.dart';
 import '../../services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -41,6 +43,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Account successfully created!')),
         );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       } else {
         throw Exception('User registration failed. User is null.');
       }
@@ -62,16 +68,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: const Size.fromHeight(60.0), // Stel de hoogte in
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
+              colors: [const Color(0xFF0C1033), const Color(0xFF9AC4F5)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Sign Up',
               style: TextStyle(
@@ -107,13 +114,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                       color: Color(0xFF0C1033)), // Consistente labelkleur
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
+                    borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -122,12 +129,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
+                  labelStyle: const TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
+                    borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
               ),
@@ -136,12 +143,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Color(0xFF0C1033)),
+                  labelStyle: const TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF9AC4F5)),
+                    borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                   ),
                 ),
                 obscureText: true,
@@ -154,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor:
-                            Color(0xFF0C1033), // Knopkleur in thema
+                            const Color(0xFF0C1033), // Knopkleur in thema
                         foregroundColor: Colors.white, // Witte tekst
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -162,6 +169,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: const Text('Sign Up'),
                     ),
+              const SizedBox(height: 20),
+              // Mogelijkheid om naar Sign In te gaan
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Already have an account?',
+                    style: TextStyle(color: Color(0xFF0C1033)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(color: Color(0xFF9AC4F5)),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

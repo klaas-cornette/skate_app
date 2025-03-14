@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skate_community/screens/leaderboard/leaderboard_screen.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skate_community/services/trick_service.dart';
 import 'package:skate_community/screens/widgets/footer_widget.dart';
@@ -99,6 +100,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               'Dagelijkse Challenges',
               style: TextStyle(
@@ -110,6 +112,18 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.leaderboard, color: Colors.white),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+                  );
+                },
+              ),
+            ],
+            iconTheme: IconThemeData(color: Colors.white),
           ),
         ),
       ),

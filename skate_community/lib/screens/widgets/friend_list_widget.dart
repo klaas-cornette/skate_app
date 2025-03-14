@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class FriendsListWidget extends StatelessWidget {
   final List<Map<String, dynamic>> friends;
   final bool isLoading;
-  final Function(Map<String, dynamic> user, String userId) onChat;
+  // final Function(Map<String, dynamic> user, String userId) onChat;
   final Function(String friendId) onDelete;
 
   const FriendsListWidget({
     super.key,
     required this.friends,
     required this.isLoading,
-    required this.onChat,
+    // required this.onChat,
     required this.onDelete,
   });
 
@@ -71,11 +71,11 @@ class FriendsListWidget extends StatelessWidget {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.message, color: Colors.blue),
-                      onPressed:
-                          isLoading ? null : () => onChat(user, user['id']),
-                    ),
+                    // IconButton(
+                    //   icon: const Icon(Icons.message, color: Colors.blue),
+                    //   onPressed:
+                    //       isLoading ? null : () => onChat(user, user['id']),
+                    // ),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: isLoading

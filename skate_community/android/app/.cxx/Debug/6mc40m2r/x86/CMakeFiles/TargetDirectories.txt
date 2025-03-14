@@ -1,0 +1,2 @@
+C:/Users/klaas/Documents/skate_app/skate_community/android/app/.cxx/Debug/6mc40m2r/x86/CMakeFiles/edit_cache.dir
+C:/Users/klaas/Documents/skate_app/skate_community/android/app/.cxx/Debug/6mc40m2r/x86/CMakeFiles/rebuild_cache.dir

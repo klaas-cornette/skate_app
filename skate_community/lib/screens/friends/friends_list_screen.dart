@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:skate_community/screens/chat/chat_messages_screen.dart';
 import 'package:skate_community/screens/friends/add_friends_screen.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
 import 'package:skate_community/screens/widgets/friend_list_widget.dart';
 import 'package:skate_community/screens/widgets/friend_requests_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
-import 'package:skate_community/services/chat_service.dart';
 import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class FriendsListScreen extends StatefulWidget {
@@ -17,7 +15,7 @@ class FriendsListScreen extends StatefulWidget {
 
 class _FriendsListScreenState extends State<FriendsListScreen> {
   final FriendsService _friendsService = FriendsService();
-  final ChatService _chatService = ChatService();
+  // final ChatService _chatService = ChatService();
   List<Map<String, dynamic>> _friendRequests = [];
   List<Map<String, dynamic>> _friends = [];
   bool _isLoading = false;
@@ -71,33 +69,33 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
     _loadFriends();
   }
 
-  Future<void> _findOrMakeChat(username, friendId) async {
-    setState(() {
-      _isLoading = true;
-    });
+  // Future<void> _findOrMakeChat(username, friendId) async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
 
-    try {
-      final response = await _chatService.findOrMakeChat(friendId);
-      String chatPartnerName = username['username'];
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChatMessagesScreen(
-            chatId: response[0]['id'], // Zorg dat je het chatId doorgeeft
-            chatPartnerName: chatPartnerName, // Zorg dat je de naam doorgeeft
-          ),
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
+  //   try {
+  //     final response = await _chatService.findOrMakeChat(friendId);
+  //     String chatPartnerName = username['username'];
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => ChatMessagesScreen(
+  //           chatId: response[0]['id'], // Zorg dat je het chatId doorgeeft
+  //           chatPartnerName: chatPartnerName, // Zorg dat je de naam doorgeeft
+  //         ),
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Error: $e')),
+  //     );
+  //   } finally {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +111,7 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Vrienden',
               style: TextStyle(
@@ -146,7 +145,7 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
                 FriendsListWidget(
                   friends: _friends,
                   isLoading: _isLoading,
-                  onChat: _findOrMakeChat,
+                  // onChat: _findOrMakeChat,
                   onDelete: _deleteFriend,
                 ),
               ],

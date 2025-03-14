@@ -5,8 +5,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:skate_community/screens/settings/settings_sreen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+import 'package:intl/intl.dart';
 import 'package:skate_community/screens/park/skatepark_detail_screen.dart';
 import 'package:skate_community/services/skatepark_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:skate_community/services/settings_service.dart';
 import 'package:skate_community/screens/widgets/footer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,46 +28,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final Set<Marker> _markers = {};
   bool _locationPermissionGranted = false;
+  bool _locationSharing = true; // Haal deze waarde op uit user_settings
+
+  final SupabaseClient _client = Supabase.instance.client;
+  final SettingsService _settingsService = SettingsService();
 
   @override
   void initState() {
     super.initState();
     _checkLocationPermission();
+    _loadUserSettings();
     _fetchSkateparks();
   }
 
+  /// Controleert of locatie permissies zijn verleend
   Future<void> _checkLocationPermission() async {
-    LocationPermission permission;
-
-    // Controleer huidige permissies
-    permission = await Geolocator.checkPermission();
-
+    LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
-      // Vraag permissie aan als deze niet is verleend
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissie is nog steeds geweigerd
-        setState(() {
-          _locationPermissionGranted = false;
-        });
+        setState(() => _locationPermissionGranted = false);
         _showPermissionDeniedDialog();
         return;
       }
     }
-
     if (permission == LocationPermission.deniedForever) {
-      // Permissie is permanent geweigerd, navigeer naar instellingen
-      setState(() {
-        _locationPermissionGranted = false;
-      });
+      setState(() => _locationPermissionGranted = false);
       _showPermissionDeniedDialog();
       return;
     }
-
-    // Permissie is verleend
-    setState(() {
-      _locationPermissionGranted = true;
-    });
+    setState(() => _locationPermissionGranted = true);
   }
 
   void _showPermissionDeniedDialog() {
@@ -72,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Locatiepermissie vereist'),
-        content: Text(
-            'Deze app heeft locatiepermissies nodig om correct te functioneren.'),
+        content: Text('Deze app heeft locatiepermissies nodig om correct te functioneren.'),
         actions: [
           TextButton(
             child: Text('Annuleren'),
@@ -91,22 +83,39 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Laadt gebruikersinstellingen (bijv. locatietoegang) uit de database
+  Future<void> _loadUserSettings() async {
+    try {
+      final userId = _client.auth.currentUser!.id;
+      final settings = await _settingsService.loadUserSettings(userId);
+      setState(() {
+        _locationSharing = settings['location_sharing'] as bool? ?? true;
+      });
+    } catch (e) {
+      // Als er een fout optreedt, gebruik dan een standaardwaarde
+      setState(() {
+        _locationSharing = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Fout bij laden instellingen: $e')),
+      );
+    }
+  }
+
+  /// Haalt skateparken op en genereert markers
   Future<void> _fetchSkateparks() async {
     try {
       final SkateparkService skateparkService = SkateparkService();
       final List<dynamic> skateparks = await skateparkService.fetchSkateparks();
 
-      // Laad het aangepaste icoon
-      // ignore: deprecated_member_use
+      // Laad het aangepaste marker-icoon
       final BitmapDescriptor customIcon = await BitmapDescriptor.fromAssetImage(
         const ImageConfiguration(),
         'assets/images/marker.png',
       );
 
-      // Genereer de lijst met markers
       final List<Marker> markers = skateparks
-          .where(
-              (park) => park['latitude'] != null && park['longitude'] != null)
+          .where((park) => park['latitude'] != null && park['longitude'] != null)
           .map<Marker>((park) {
         return Marker(
           markerId: MarkerId(park['id']),
@@ -119,18 +128,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) =>
                       SkateparkDetailScreen(skateparkId: park['id']),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
                     const begin = Offset(0.0, 1.0);
                     const end = Offset.zero;
                     const curve = Curves.easeInOut;
-
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: curve));
-                    var offsetAnimation = animation.drive(tween);
-
+                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
                     return SlideTransition(
-                      position: offsetAnimation,
+                      position: animation.drive(tween),
                       child: child,
                     );
                   },
@@ -142,7 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }).toList();
 
-      // Update de markers in de state
       setState(() {
         _markers.clear();
         _markers.addAll(markers);
@@ -156,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: const Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -166,30 +169,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               'Skate Flow',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Raleway', // Zorg dat 'Raleway' juist is toegevoegd
+                fontFamily: 'Raleway',
               ),
             ),
-            backgroundColor:
-                Colors.transparent, // Transparant om de gradient te tonen
-            elevation: 0, // Verwijder schaduw
+            backgroundColor: Colors.transparent,
+            elevation: 0,
             actions: [
-              // IconButton(
-              //   icon: Icon(Icons.logout,
-              //       color: Colors.white), // Witte kleur voor icoon
-              //   onPressed: () async {
-              //     await Supabase.instance.client.auth.signOut();
-              //     Navigator.pushReplacement(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => SignInScreen()),
-              //     );
-              //   },
-              // ),
               IconButton(
                 icon: Icon(Icons.settings, color: Colors.white),
                 onPressed: () {
@@ -198,9 +190,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) => SettingsScreen()),
                   );
                 },
-              )
+              ),
             ],
-            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
+            iconTheme: IconThemeData(color: Colors.white),
           ),
         ),
       ),
@@ -212,8 +204,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
+              // Gebruik de instelling van de gebruiker om te bepalen of de huidige locatie getoond wordt
+              myLocationEnabled: _locationSharing,
+              myLocationButtonEnabled: _locationSharing,
               zoomControlsEnabled: false,
               compassEnabled: true,
             )

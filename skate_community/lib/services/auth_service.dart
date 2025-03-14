@@ -25,8 +25,19 @@ class AuthService {
         'email': email,
         'username': username,
       });
+      
+      await _client.from('user_settings').insert({
+      'user_id': userId,
+      'location_sharing': true,
+    });
     } catch (e) {
       throw Exception('Failed to add user to database: ${e.toString()}');
     }
   }
+
+  
+
 }
+
+
+

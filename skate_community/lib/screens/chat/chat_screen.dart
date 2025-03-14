@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:skate_community/screens/chat/chat_messages_screen.dart';
-import 'package:skate_community/screens/friends/friends_list_screen.dart';
 import 'package:skate_community/screens/widgets/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/chatbody_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
 import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/services/friend_service.dart';
+import 'package:skate_community/screens/widgets/search_bar.dart' as custom;
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -17,119 +18,105 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final SupabaseClient supabase = Supabase.instance.client;
   final ChatService _chatService = ChatService();
+  final FriendsService _friendsService = FriendsService();
+
   bool _isLoading = false;
   String? _error;
+
   List<Map<String, dynamic>> _chats = [];
+  List<Map<String, dynamic>> _friends = [];
+  List<Map<String, dynamic>> _filteredFriends = [];
 
-  void setLoading(bool isLoading) {
+  Future<void> _loadData() async {
     setState(() {
-      _isLoading = isLoading;
+      _isLoading = true;
+      _error = null;
     });
-  }
-
-  void setError(String? error) {
-    setState(() {
-      _error = error;
-    });
-  }
-
-  Future<void> fetchChats() async {
-    setLoading(true);
-    setError(null);
     final user = supabase.auth.currentUser;
     if (user == null) {
-      setError('User not logged in');
-      setLoading(false);
+      setState(() {
+        _error = 'User not logged in';
+        _isLoading = false;
+      });
       return;
     }
 
     try {
       final chats = await _chatService.getChatsFromUser(user.id);
+      final friends = await _friendsService.getFriends();
       setState(() {
         _chats = chats;
+        _friends = friends;
       });
     } catch (e) {
-      setError('Error fetching chats: $e');
+      setState(() => _error = 'Fout bij laden data: $e');
     } finally {
-      setLoading(false);
+      setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _findOrMakeChat(String username, String friendId) async {
+    setState(() => _isLoading = true);
+    try {
+      final response = await _chatService.findOrMakeChat(friendId);
+      final chatId = response[0]['id'];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChatMessagesScreen(
+            chatId: chatId,
+            chatPartnerName: username,
+          ),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    fetchChats();
+    _loadData();
   }
 
-  Widget _buildChatList() {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+  void _handleSearch(String query) async {
+    query = query.trim().toLowerCase();
+    if (query.isEmpty) {
+      setState(() {
+        _filteredFriends = [];
+      });
+      return;
     }
+    final users = await _friendsService.searchUsers(query);
+    final filteredUsers = users.where((item) {
+      return _friends.any(
+        (friend) =>
+            friend['user_id'] == item['id'] || friend['friend_id'] == item['id'],
+      );
+    }).toList();
 
-    if (_error != null) {
-      return Center(child: Text(_error!));
-    }
+    setState(() {
+      _filteredFriends = filteredUsers;
+    });
+  }
 
-    if (_chats.isEmpty) {
-      return const Text('Je hebt nog geen chats.');
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 10),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: _chats.length,
-          itemBuilder: (context, index) {
-            final chat = _chats[index];
-            final formattedDate = DateFormat('dd MMM yyyy, hh:mm a')
-                .format(DateTime.parse(chat['created_at']));
-            final chatPartnerUsername =
-                chat['user1_id'] == supabase.auth.currentUser!.id
-                    ? chat['user2']['username']
-                    : chat['user1']['username'];
-
-            return Card(
-              elevation: 3,
-              margin: EdgeInsets.symmetric(vertical: 5),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.blueAccent,
-                  child: Icon(Icons.chat, color: Colors.white),
-                ),
-                title: Text('Chat met: $chatPartnerUsername'),
-                subtitle: Text(formattedDate),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatMessagesScreen(
-                        chatId: chat['id'],
-                        chatPartnerName:
-                            chatPartnerUsername, // Zorg dat je de naam doorgeeft
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
-      ],
-    );
+  void _onChanged(String query) {
+    _handleSearch(query);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // AppBar met gradient
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: const Size.fromHeight(60.0),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
               begin: Alignment.topLeft,
@@ -137,6 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Chats',
               style: TextStyle(
@@ -145,32 +133,55 @@ class _ChatScreenState extends State<ChatScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor:
-                Colors.transparent, // Transparant om de gradient te tonen
-            elevation: 0, // Geen schaduw
-            actions: [
-              IconButton(
-                icon: Icon(Icons.add, color: Colors.white), // Witte icoon
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FriendsListScreen()),
-                  );
-                },
-              ),
-            ],
-            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
         ),
       ),
+
       body: BackgroundWrapper(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: _buildChatList(),
+          child: Column(
+            children: [
+              // Zoekbalk
+              custom.SearchBar(
+                hintText: 'Zoek vrienden om te chatten...',
+                onSearch: _handleSearch,
+                onChanged: _onChanged,
+              ),
+              const SizedBox(height: 12),
+              // Uitgebreide widget die bepaalt wat we tonen:
+              Expanded(
+                child: ChatbodyWidget(
+                  isLoading: _isLoading,
+                  error: _error,
+                  chats: _chats,
+                  filteredFriends: _filteredFriends,
+                  supabase: supabase,
+                  onOpenChat: (chat) {
+                    // Als je direct wilt openklikken in chat-lijst
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatMessagesScreen(
+                          chatId: chat['id'],
+                          chatPartnerName: chat['partnerName'],
+                        ),
+                      ),
+                    );
+                  },
+                  onOpenFilteredFriend: (username, friendId) {
+                    // Start of vind chat met friend
+                    _findOrMakeChat(username, friendId);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: FooterWidget(currentIndex: 2),
+      bottomNavigationBar: const FooterWidget(currentIndex: 2),
     );
   }
 }

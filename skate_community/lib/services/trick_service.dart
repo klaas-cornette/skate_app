@@ -11,28 +11,24 @@ class TrickService {
 
   Future<void> loadTricks() async {
     try {
-      final String response =
-          await rootBundle.loadString('assets/store/skate-tricks.json');
+      final String response = await rootBundle.loadString('assets/store/skate-tricks.json');
       final List<dynamic> data = json.decode(response);
 
       if (data.isEmpty) {
-        throw Exception(
-            "De JSON-lijst is leeg. Controleer of het bestand correct is.");
+        throw Exception("De JSON-lijst is leeg. Controleer of het bestand correct is.");
       }
 
       tricks = List<Map<String, dynamic>>.from(data);
       print("Tricks succesvol geladen: ${tricks.length} tricks");
     } on PlatformException catch (e) {
       print("PlatformException bij laden van JSON: ${e.message}");
-      throw Exception(
-          "Er was een probleem bij het laden van de tricks. Controleer het JSON-bestand.");
+      throw Exception("Er was een probleem bij het laden van de tricks. Controleer het JSON-bestand.");
     } on FormatException catch (e) {
       print("JSON Parsing-fout: ${e.message}");
       throw Exception("De JSON is ongeldig of beschadigd.");
     } catch (e) {
       print("Onverwachte fout bij laden van tricks: $e");
-      throw Exception(
-          "Er is een onbekende fout opgetreden bij het laden van de tricks.");
+      throw Exception("Er is een onbekende fout opgetreden bij het laden van de tricks.");
     }
   }
 
@@ -41,41 +37,52 @@ class TrickService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? lastDate = prefs.getString("lastChallengeDate");
       String today = DateTime.now().toIso8601String().split('T')[0];
+      final user = _client.auth.currentUser!.id;
 
       if (lastDate == today) {
-        final response = await _client
-            .from('daily_challenges')
-            .select('*')
-            .eq('created_at', today);
+        final response = await _client.from('daily_challenges').select('*').eq('created_at', today).eq('user_id', _client.auth.currentUser!.id);
+        print("Daily challenges voor vandaag: $response");
+        if (response.isNotEmpty) {
+          return List<Map<String, dynamic>>.from(response);
+        }
+        await loadTricks();
+        if (tricks.isEmpty) {
+          throw Exception("Geen tricks beschikbaar voor challenges.");
+        }
 
-        return List<Map<String, dynamic>>.from(response);
+        await _generateDailyChallenges();
+        await prefs.setString("lastChallengeDate", today);
+        await prefs.setString("lastChallengeUser", user);
+
+        print("Nieuwe daily challenges gegenereerd!");
+
+        final data = await _client.from('daily_challenges').select('*').eq('created_at', today).eq('user_id', _client.auth.currentUser!.id);
+
+        print(data);
+        return List<Map<String, dynamic>>.from(data);
       }
 
       await loadTricks();
-      if (tricks.isEmpty) {
-        throw Exception("Geen tricks beschikbaar voor challenges.");
-      }
+        if (tricks.isEmpty) {
+          throw Exception("Geen tricks beschikbaar voor challenges.");
+        }
 
-      await _generateDailyChallenges();
-      await prefs.setString("lastChallengeDate", today);
-      // await prefs.setString("dailyChallenges", json.encode(newChallenges));
+        await _generateDailyChallenges();
+        await prefs.setString("lastChallengeDate", today);
+        await prefs.setString("lastChallengeUser", user);
 
-      print("Nieuwe daily challenges gegenereerd!");
+        print("Nieuwe daily challenges gegenereerd!");
 
-      final response = await _client
-          .from('daily_challenges')
-          .select('*')
-          .eq('created_at', today);
+        final data = await _client.from('daily_challenges').select('*').eq('created_at', today).eq('user_id', _client.auth.currentUser!.id);
 
-      print(response);
-      return List<Map<String, dynamic>>.from(response);
+        print(data);
+        return List<Map<String, dynamic>>.from(data);
     } on TimeoutException catch (e) {
       print("Timeout-fout: ${e.message}");
       throw Exception("De aanvraag duurde te lang. Probeer het later opnieuw.");
     } on FormatException catch (e) {
       print("JSON Parsing-fout bij het opslaan van challenges: ${e.message}");
-      throw Exception(
-          "Opslag van challenges is mislukt. Controleer je opslagruimte.");
+      throw Exception("Opslag van challenges is mislukt. Controleer je opslagruimte.");
     } catch (e) {
       print("Onverwachte fout bij het ophalen van daily challenges: $e");
       return []; // Voorkom crash bij fouten, retourneer een lege lijst.
@@ -83,46 +90,35 @@ class TrickService {
   }
 
   Future<List<Map<String, dynamic>>> _generateDailyChallenges() async {
-    List<Map<String, dynamic>> easyTricks =
-        tricks.where((t) => t['difficulty'] < 30).toList();
+    List<Map<String, dynamic>> easyTricks = tricks.where((t) => t['difficulty'] < 30).toList();
     List<Map<String, dynamic>> allTricks = List.from(tricks);
     final random = Random();
+
     List<Map<String, dynamic>> selectedChallenges = [];
 
     try {
-      // Voeg 3 makkelijke tricks toe
       while (selectedChallenges.length < 3 && easyTricks.isNotEmpty) {
-        selectedChallenges
-            .add(easyTricks.removeAt(random.nextInt(easyTricks.length)));
+        selectedChallenges.add(easyTricks.removeAt(random.nextInt(easyTricks.length)));
       }
 
-      // Vul aan met 2 willekeurige tricks
       while (selectedChallenges.length < 5 && allTricks.isNotEmpty) {
-        selectedChallenges
-            .add(allTricks.removeAt(random.nextInt(allTricks.length)));
+        selectedChallenges.add(allTricks.removeAt(random.nextInt(allTricks.length)));
       }
 
       print("Challenges gegenereerd: ${selectedChallenges.length}");
 
-      // **Stap 1: Haal de huidige challenges uit de database**
       String today = DateTime.now().toIso8601String().split('T')[0];
 
-      final existingChallenges = await _client
-          .from('daily_challenges')
-          .select('trick_id')
-          .eq('created_at', today);
+      final existingChallenges = await _client.from('daily_challenges').select('trick_id').eq('created_at', today).eq('user_id', _client.auth.currentUser!.id);
 
-      final existingTrickIds =
-          existingChallenges.map((e) => e['trick_id'].toString()).toSet();
-      final newTrickIds =
-          selectedChallenges.map((e) => e['id'].toString()).toSet();
+      final existingTrickIds = existingChallenges.map((e) => e['trick_id'].toString()).toSet();
+      final newTrickIds = selectedChallenges.map((e) => e['id'].toString()).toSet();
 
       print("Bestaande challenges: $existingTrickIds");
       print("Nieuwe challenges: $newTrickIds");
 
       // **Stap 2: Als de challenges hetzelfde zijn, doe niks**
-      if (existingTrickIds.containsAll(newTrickIds) &&
-          newTrickIds.containsAll(existingTrickIds)) {
+      if (existingTrickIds.containsAll(newTrickIds) && newTrickIds.containsAll(existingTrickIds)) {
         print("⚠️ Daily challenges zijn al hetzelfde, geen update nodig.");
         return selectedChallenges;
       }
@@ -135,6 +131,7 @@ class TrickService {
       List<Map<String, dynamic>> challengesToInsert = selectedChallenges
           .map((challenge) => {
                 "trick_id": challenge['id'],
+                "user_id": _client.auth.currentUser!.id,
                 "completed": false,
                 "points": challenge['difficulty'],
                 "name": challenge['name'],
@@ -154,11 +151,7 @@ class TrickService {
 
   Future<Map<String, dynamic>> getActiveChallengById(challengeId) async {
     try {
-      final response = await _client
-          .from('daily_challenges')
-          .select('*')
-          .eq("trick_id", challengeId)
-          .single();
+      final response = await _client.from('daily_challenges').select('*').eq("trick_id", challengeId).eq("user_id", _client.auth.currentUser!.id).single();
 
       return response;
     } on TimeoutException catch (e) {
@@ -166,28 +159,20 @@ class TrickService {
       throw Exception("De aanvraag duurde te lang. Probeer het later opnieuw.");
     } on FormatException catch (e) {
       print("JSON Parsing-fout bij het opslaan van challenges: ${e.message}");
-      throw Exception(
-          "Opslag van challenges is mislukt. Controleer je opslagruimte.");
+      throw Exception("Opslag van challenges is mislukt. Controleer je opslagruimte.");
     } catch (e) {
       print("Onverwachte fout bij het ophalen van daily challenges: $e");
       return {};
     }
   }
 
-  Future<void> addUserChallenge(
-      String challengeId, String trickName, int points) async {
+  Future<void> addUserChallenge(String challengeId, String trickName, int points) async {
     try {
       final userId = _client.auth.currentUser!.id;
 
-      await _client
-          .from('daily_challenges')
-          .update({"completed": true}).eq('trick_id', challengeId);
+      await _client.from('daily_challenges').update({"completed": true}).eq('trick_id', challengeId);
 
-      final existingChallenge = await _client
-          .from('user_tricks')
-          .select('count')
-          .eq('user_id', userId)
-          .eq('trick_id', challengeId);
+      final existingChallenge = await _client.from('user_tricks').select('count').eq('user_id', userId).eq('trick_id', challengeId);
 
       if (existingChallenge.isNotEmpty) {
         print("✅ Challenge bestaat al, bijwerken...");
@@ -231,23 +216,12 @@ class TrickService {
     try {
       final userId = _client.auth.currentUser!.id;
 
-      await _client
-          .from('daily_challenges')
-          .update({"completed": false}).eq('trick_id', challengeId);
+      await _client.from('daily_challenges').update({"completed": false}).eq('trick_id', challengeId);
 
-      final challenge = await _client
-          .from('user_tricks')
-          .select('count')
-          .eq('user_id', userId)
-          .eq('trick_id', challengeId)
-          .single();
+      final challenge = await _client.from('user_tricks').select('count').eq('user_id', userId).eq('trick_id', challengeId).single();
 
       final count = challenge['count'] - 1;
-      await _client
-          .from('user_tricks')
-          .update({"count": count})
-          .eq('user_id', userId)
-          .eq('trick_id', challengeId);
+      await _client.from('user_tricks').update({"count": count}).eq('user_id', userId).eq('trick_id', challengeId);
 
       print("✅ Challenge verwijderd!");
     } on PostgrestException catch (e) {
@@ -262,11 +236,9 @@ class TrickService {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getUserCompletedChallenges(
-      String userId) async {
+  Future<List<Map<String, dynamic>>> getUserCompletedChallenges(String userId) async {
     try {
-      final response =
-          await _client.from('user_tricks').select('*').eq('user_id', userId);
+      final response = await _client.from('user_tricks').select('*').eq('user_id', userId);
 
       if (response.isEmpty) {
         print("ℹ️ Geen voltooide challenges gevonden.");
