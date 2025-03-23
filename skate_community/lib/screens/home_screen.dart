@@ -7,9 +7,10 @@ import 'package:skate_community/screens/park/skatepark_detail_screen.dart';
 import 'package:skate_community/services/skatepark_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/settings_service.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
-import 'package:skate_community/screens/widgets/search_bar.dart' as custom;
-import 'package:skate_community/screens/widgets/skatepark_cards_widget.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/search_bar.dart' as custom;
+import 'package:skate_community/screens/widgets/detail/skatepark_cards_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> _skateparks = [];
   List<dynamic> _filteredSkateparks = [];
   bool _locationPermissionGranted = false;
-  bool _locationSharing = true; 
+  bool _locationSharing = true;
 
   @override
   void initState() {
@@ -53,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  /// Controleert of locatie permissies zijn verleend
   Future<void> _checkLocationPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -95,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// Laadt gebruikersinstellingen (bijv. locatietoegang) uit de database
   Future<void> _loadUserSettings() async {
     try {
       final userId = _client.auth.currentUser!.id;
@@ -113,9 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-
-
-  // Haalt skateparken op, genereert markers en slaat de skateparken lokaal op voor de search
   Future<void> _fetchSkateparks() async {
     try {
       final SkateparkService skateparkService = SkateparkService();
@@ -124,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _skateparks = skateparks;
         _filteredSkateparks = skateparks;
-
       });
 
       final BitmapDescriptor customIcon = await BitmapDescriptor.fromAssetImage(
@@ -184,16 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          decoration: BoxDecoration(
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -272,6 +264,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       bottomNavigationBar: const FooterWidget(currentIndex: 0),
-    );
+    ));
   }
 }

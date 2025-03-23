@@ -1,10 +1,27 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:skate_community/screens/sessions/session_list_screen.dart';
 
 class MySessionCard extends StatelessWidget {
   final Map<String, dynamic> session;
+
   const MySessionCard({super.key, required this.session});
+
+  void handelDelete(BuildContext context, String sessionId) async {
+    try{
+      print(sessionId);
+      await Supabase.instance.client.from('sessions').delete().match({ 'id': sessionId });
+      Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SessionListScreen()),
+                  );
+    } catch (e) {
+      print('Error deleting session: $e');
+      throw Exception('Error deleting session');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +67,19 @@ class MySessionCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                // evt. actions in "Mijn Sessie"
+               ElevatedButton.icon(
+                  onPressed: () => {
+                    handelDelete(context, session['id'].toString())
+                  },
+                  label: const Text('Delete'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 172, 36, 26),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 8),

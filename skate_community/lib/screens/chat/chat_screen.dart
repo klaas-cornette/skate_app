@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/chat/chat_messages_screen.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/chatbody_widget.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/chat/chatbody_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
-import 'package:skate_community/screens/widgets/search_bar.dart' as custom;
+import 'package:skate_community/screens/widgets/main/search_bar.dart' as custom;
+import 'package:skate_community/middleware/middleware.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -95,8 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final users = await _friendsService.searchUsers(query);
     final filteredUsers = users.where((item) {
       return _friends.any(
-        (friend) =>
-            friend['user_id'] == item['id'] || friend['friend_id'] == item['id'],
+        (friend) => friend['user_id'] == item['id'] || friend['friend_id'] == item['id'],
       );
     }).toList();
 
@@ -111,17 +111,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       // AppBar met gradient
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          decoration: BoxDecoration(
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -182,6 +179,6 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
       bottomNavigationBar: const FooterWidget(currentIndex: 2),
-    );
+    ));
   }
 }

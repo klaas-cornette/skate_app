@@ -24,16 +24,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _isLoading = true;
     });
 
+    if (_usernameController.text.length > 15) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Username mag maximaal 15 karakters lang zijn.")),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
+    final bool usernameTaken = await _authService.usernameExists(_usernameController.text);
+    if (usernameTaken) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Username bestaat al. Kies een andere username.")),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     try {
-      // Registreer gebruiker in Supabase Auth
       final response = await _authService.signUp(
         _emailController.text,
         _passwordController.text,
       );
-
-      // Controleer of de gebruiker succesvol is aangemaakt
       if (response.user != null) {
-        // Voeg gebruiker toe aan de `users`-tabel
         await _authService.addUserToDatabase(
           response.user!.id,
           _emailController.text,
@@ -58,9 +75,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = false;
       });
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
     }
   }
 
@@ -68,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: const Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -87,11 +101,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor:
-                Colors.transparent, // Transparant om de gradient te tonen
-            elevation: 0, // Geen schaduw
-            iconTheme:
-                const IconThemeData(color: Colors.white), // Witte icoonkleur
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
           ),
         ),
       ),
@@ -106,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0C1033), // Consistente tekstkleur
+                  color: Color(0xFF0C1033),
                 ),
               ),
               const SizedBox(height: 20),
@@ -114,8 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
-                  labelStyle: const TextStyle(
-                      color: Color(0xFF0C1033)), // Consistente labelkleur
+                  labelStyle: const TextStyle(color: Color(0xFF0C1033)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -160,9 +171,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onPressed: _signUp,
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
-                        backgroundColor:
-                            const Color(0xFF0C1033), // Knopkleur in thema
-                        foregroundColor: Colors.white, // Witte tekst
+                        backgroundColor: const Color(0xFF0C1033),
+                        foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -170,7 +180,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: const Text('Sign Up'),
                     ),
               const SizedBox(height: 20),
-              // Mogelijkheid om naar Sign In te gaan
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

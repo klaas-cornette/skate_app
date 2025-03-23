@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/chat_service.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class ChatMessagesScreen extends StatefulWidget {
   final String chatId;
@@ -85,8 +86,7 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
       itemBuilder: (context, index) {
         final message = _messages[index];
         final senderId = message['sender_id'];
-        final formattedDate = DateFormat('dd MMM yyyy, hh:mm a')
-            .format(DateTime.parse(message['created_at']));
+        final formattedDate = DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(message['created_at']));
         final isMyMessage = senderId == currentUserId;
 
         return Align(
@@ -143,8 +143,7 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
                 hintText: 'Typ een bericht...',
                 filled: true,
                 fillColor: Colors.grey[200],
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
@@ -163,8 +162,7 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
               onPressed: () {
                 final content = messageController.text.trim();
                 if (content.isNotEmpty) {
-                  _chatService.sendMessage(
-                      widget.chatId, supabase.auth.currentUser!.id, content);
+                  _chatService.sendMessage(widget.chatId, supabase.auth.currentUser!.id, content);
                   messageController.clear();
                   FocusScope.of(context).unfocus();
                 }
@@ -178,16 +176,13 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Stel de hoogte in
+        preferredSize: Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             title: Text(
@@ -198,10 +193,9 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor:
-                Colors.transparent, // Transparant om de gradient te tonen
-            elevation: 0, // Geen schaduw
-            iconTheme: IconThemeData(color: Colors.white), // Witte icoonkleur
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.white),
           ),
         ),
       ),
@@ -213,6 +207,6 @@ class _ChatMessagesScreenState extends State<ChatMessagesScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

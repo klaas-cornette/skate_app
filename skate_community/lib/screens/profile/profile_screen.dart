@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:skate_community/services/user_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -52,8 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (pickedFile != null) {
       setState(() {
         _newProfileImage = File(pickedFile.path);
@@ -62,56 +62,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _saveProfile() async {
-  setState(() => _isLoading = true);
-  try {
-    final userId = _client.auth.currentUser!.id;
-    String? imageUrl = _profileImageUrl;
+    setState(() => _isLoading = true);
+    try {
+      final userId = _client.auth.currentUser!.id;
+      String? imageUrl = _profileImageUrl;
 
-    if (_newProfileImage != null) {
-      final fileExt = _newProfileImage!.path.split('.').last;
-      final fileName = '$userId.$fileExt';
+      if (_newProfileImage != null) {
+        final fileExt = _newProfileImage!.path.split('.').last;
+        final fileName = '$userId.$fileExt';
 
-      // Upload de afbeelding met de upload()-methode
-      await _client.storage
-          .from('profile-images')
-          .upload(fileName, _newProfileImage!);
+        // Upload de afbeelding met de upload()-methode
+        await _client.storage.from('profile-images').upload(fileName, _newProfileImage!);
 
-      // Verkrijg de openbare URL
-      final publicUrlResponse = _client.storage.from('profile-images').getPublicUrl(fileName);
-      imageUrl = publicUrlResponse;
+        // Verkrijg de openbare URL
+        final publicUrlResponse = _client.storage.from('profile-images').getPublicUrl(fileName);
+        imageUrl = publicUrlResponse;
+      }
+
+      await _userService.updateUserProfile(
+        userId,
+        username: _usernameController.text,
+        profileImageUrl: imageUrl,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Profiel succesvol bijgewerkt!')),
+      );
+      _loadUserProfile();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Fout bij opslaan profiel: $e')),
+      );
+    } finally {
+      setState(() => _isLoading = false);
     }
-
-    await _userService.updateUserProfile(
-      userId,
-      username: _usernameController.text,
-      profileImageUrl: imageUrl,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Profiel succesvol bijgewerkt!')),
-    );
-    _loadUserProfile();
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Fout bij opslaan profiel: $e')),
-    );
-  } finally {
-    setState(() => _isLoading = false);
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          decoration: BoxDecoration(
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             title: const Text(
@@ -148,7 +142,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            // Profiel foto met edit knop
                             Center(
                               child: Stack(
                                 children: [
@@ -158,9 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ? FileImage(_newProfileImage!)
                                         : (_profileImageUrl != null
                                             ? NetworkImage(_profileImageUrl!)
-                                            : AssetImage(
-                                                    'assets/images/default_profile.png')
-                                                as ImageProvider),
+                                            : AssetImage('assets/images/default_profile.png') as ImageProvider),
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -187,14 +178,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               controller: _usernameController,
                               decoration: InputDecoration(
                                 labelText: 'Gebruikersnaam',
-                                labelStyle:
-                                    const TextStyle(color: Color(0xFF0C1033)),
+                                labelStyle: const TextStyle(color: Color(0xFF0C1033)),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color(0xFF9AC4F5)),
+                                  borderSide: const BorderSide(color: Color(0xFF9AC4F5)),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
@@ -233,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
       ),
-      bottomNavigationBar: const FooterWidget(currentIndex: 2),
-    );
+      bottomNavigationBar: const FooterWidget(currentIndex: 999),
+    ));
   }
 }

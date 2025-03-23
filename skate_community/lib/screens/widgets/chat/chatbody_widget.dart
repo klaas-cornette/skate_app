@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:skate_community/screens/widgets/chat_list_widget.dart';
-import 'package:skate_community/screens/widgets/filtered_friend_list_widget.dart';
+import 'package:skate_community/screens/widgets/chat/chat_list_widget.dart';
+import 'package:skate_community/screens/widgets/friend/filtered_friend_list_widget.dart';
 
 class ChatbodyWidget extends StatelessWidget {
   final bool isLoading;
@@ -10,10 +10,7 @@ class ChatbodyWidget extends StatelessWidget {
   final List<Map<String, dynamic>> filteredFriends;
   final SupabaseClient supabase;
   
-  // Callback wanneer je in de chats op een item klikt
   final Function(Map<String, dynamic> chat) onOpenChat;
-  
-  // Callback wanneer je in de gefilterde friends op iemand klikt
   final Function(String username, String friendId) onOpenFilteredFriend;
 
   const ChatbodyWidget({

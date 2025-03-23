@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:skate_community/screens/widgets/my_session_card.dart';
+import 'package:skate_community/screens/widgets/session/my_session_card.dart';
 
 class MySessionListWidget extends StatelessWidget {
   final List<Map<String, dynamic>> sessions;

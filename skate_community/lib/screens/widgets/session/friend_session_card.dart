@@ -58,7 +58,7 @@ class FriendSessionCard extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   onPressed: () => onJoin(sessionId),
-                  icon: const Icon(Icons.group_add),
+                  icon: const Icon(Icons.group_add, color: Colors.white),
                   label: const Text('Join'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0C1033),

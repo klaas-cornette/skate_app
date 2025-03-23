@@ -1,7 +1,7 @@
 // lib/screens/session_list/friend_session_list_widget.dart
 
 import 'package:flutter/material.dart';
-import 'package:skate_community/screens/widgets/friend_session_card.dart';
+import 'package:skate_community/screens/widgets/session/friend_session_card.dart';
 
 class FriendSessionListWidget extends StatelessWidget {
   final List<Map<String, dynamic>> sessions;

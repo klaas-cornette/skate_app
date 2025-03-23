@@ -31,7 +31,7 @@ class DetailList extends StatelessWidget {
         
         // Titel
         title: Text(
-          'Opstakels',
+          'Obstakels',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class DetailList extends StatelessWidget {
                   },
                 ),
               )
-            : const Text('Geen opstakels beschikbaar.'),
+            : const Text('Geen obstakels beschikbaar.'),
         
         // Actieknoppen
         actions: [
@@ -109,7 +109,7 @@ class DetailList extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.skateboarding_sharp, color: Colors.brown),
               title: const Text(
-                'Opstakels',
+                'Obstakels',
                 style: TextStyle(fontSize: 18),
               ),
               trailing: const Icon(Icons.chevron_right),
@@ -133,7 +133,7 @@ class DetailList extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.straighten, color: Colors.green),
               title: Text(
-                '${skatepark!['size']} grootte',
+                '${skatepark!['size']} oppervlakte',
                 style: const TextStyle(fontSize: 18),
               ),
             ),

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:skate_community/screens/sessions/session_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:skate_community/services/sesion_service.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
-import 'package:skate_community/screens/widgets/my_session_list_widget.dart';
-import 'package:skate_community/screens/widgets/friend_session_list_widget.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/screens/widgets/session/my_session_list_widget.dart';
+import 'package:skate_community/screens/widgets/session/friend_session_list_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class SessionListScreen extends StatefulWidget {
   const SessionListScreen({super.key});
@@ -111,17 +112,13 @@ class _SessionListScreenState extends State<SessionListScreen> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // AppBar met gradient + TabBar
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100.0),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          decoration: BoxDecoration(
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -166,6 +163,6 @@ class _SessionListScreenState extends State<SessionListScreen> with SingleTicker
         ),
       ),
       bottomNavigationBar: const FooterWidget(currentIndex: 3),
-    );
+    ));
   }
 }

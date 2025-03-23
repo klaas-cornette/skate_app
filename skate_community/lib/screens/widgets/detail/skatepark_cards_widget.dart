@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/park/skatepark_detail_screen.dart';
 import 'package:skate_community/services/sesion_service.dart';
+import 'package:skate_community/services/rating_service.dart';
 
 class SkateparkCardsWidget extends StatefulWidget {
   final List<dynamic> skateparks;
@@ -13,30 +14,46 @@ class SkateparkCardsWidget extends StatefulWidget {
 
 class _SkateparkCardsWidgetState extends State<SkateparkCardsWidget> {
   final SesionService _sesionService = SesionService();
+  final RatingService _ratingService = RatingService();
   Map<dynamic, int> _sessionCounts = {};
+  Map<dynamic, double> _ratingOverAll = {};
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _initializeSessionCounts();
+    _initializeCardInfo();
   }
 
-  Future<void> _initializeSessionCounts() async {
+  Future<void> _initializeCardInfo() async {
     try {
       final friendSessions = await _sesionService.getFriendSessions();
+      Map<dynamic, double> ratings = {};
       Map<dynamic, int> counts = {};
+
       for (var park in widget.skateparks) {
         final id = park['id'];
+
+        final ratingData = await _ratingService.getRatingsForSkatepark(id);
+
+        final obstacles = ratingData['obstacles'] as double;
+        final maintenance = ratingData['maintenance'] as double;
+        final weather = ratingData['weather'] as double;
+        final community = ratingData['community'] as double;
+
+        final overall = double.parse(((obstacles + maintenance + weather + community) / 4.0).toStringAsFixed(1));
+        ratings[id] = overall;
+
         final count = friendSessions.where((session) => session['skatepark_id'] == id).toList().length;
         counts[id] = count;
       }
       setState(() {
         _sessionCounts = counts;
+        _ratingOverAll = ratings;
         _isLoading = false;
       });
     } catch (error) {
-      print('Error fetching session counts: $error');
+      print('Error fetching: $error');
       setState(() {
         _isLoading = false;
       });
@@ -56,7 +73,7 @@ class _SkateparkCardsWidgetState extends State<SkateparkCardsWidget> {
               itemBuilder: (context, index) {
                 final park = widget.skateparks[index];
                 final sessionCount = _sessionCounts[park['id']] ?? 0;
-                final stars = park['stars'] ?? 0;
+                final ratingOverAll = _ratingOverAll[park['id']] ?? 0;
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -122,7 +139,7 @@ class _SkateparkCardsWidgetState extends State<SkateparkCardsWidget> {
                                       Row(
                                         children: [
                                           Text(
-                                            stars.toString(),
+                                            ratingOverAll.toString(),
                                             style: const TextStyle(fontSize: 12),
                                           ),
                                           const SizedBox(width: 4),

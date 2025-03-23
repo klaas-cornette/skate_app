@@ -1,12 +1,12 @@
-// lib/screens/add_friend_screen.dart
-
 import 'package:flutter/material.dart';
-import 'package:skate_community/screens/widgets/add_friend_request_widget.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/search_bar_widget.dart';
-import 'package:skate_community/screens/widgets/search_results_widget.dart';
+import 'package:skate_community/screens/widgets/friend/add_friend_request_widget.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/friend/search_bar_widget.dart';
+import 'package:skate_community/screens/widgets/friend/search_results_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
 import 'package:skate_community/services/user_service.dart';
+import 'package:skate_community/middleware/middleware.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
 
 class AddFriendScreen extends StatefulWidget {
   const AddFriendScreen({super.key});
@@ -30,7 +30,6 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     _loadFriendRequests();
   }
 
-  /// Laadt inkomende vriendverzoeken
   Future<void> _loadFriendRequests() async {
     setState(() {
       _isLoading = true;
@@ -56,7 +55,6 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     }
   }
 
-  /// Zoekt gebruikers op basis van de zoekterm
   Future<void> _searchUsers() async {
     final query = _searchController.text.trim();
     if (query.isEmpty) {
@@ -76,8 +74,7 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
       final results = await _userService.searchUsers(query);
 
       // Haal de ID's van je vrienden op
-      final currentUser = await _userService
-          .getCurrentUser(); // Pas dit aan aan je methode voor user ID
+      final currentUser = await _userService.getCurrentUser(); // Pas dit aan aan je methode voor user ID
       final currentUserId = currentUser['id'];
       final friends = await _friendsService.getFriends(); // Haal vrienden op
       final friendIds = friends.map((friend) => friend['friend_id']).toSet();
@@ -105,7 +102,6 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     }
   }
 
-  /// Verzendt een vriendverzoek naar een gebruiker
   Future<void> _sendFriendRequest(String receiverId) async {
     setState(() {
       _isLoading = true;
@@ -129,7 +125,6 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     }
   }
 
-  /// Accepteert een vriendverzoek
   Future<void> _acceptFriendRequest(String requestId, String senderId) async {
     setState(() {
       _isLoading = true;
@@ -153,7 +148,6 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
     }
   }
 
-  /// Weigert een vriendverzoek
   Future<void> _declineFriendRequest(String requestId) async {
     setState(() {
       _isLoading = true;
@@ -179,18 +173,16 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Voeg vrienden toe',
               style: TextStyle(
@@ -235,6 +227,7 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
           ),
         ),
       ),
-    );
+      bottomNavigationBar: const FooterWidget(currentIndex: 999),
+    ));
   }
 }

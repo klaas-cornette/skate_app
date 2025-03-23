@@ -2,13 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:skate_community/screens/sessions/session_list_screen.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
 import 'package:skate_community/services/sesion_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class SessionScreen extends StatefulWidget {
-  const SessionScreen({super.key});
+  final String? skateparkId;
+
+  const SessionScreen({super.key, this.skateparkId});
 
   @override
   _SessionScreenState createState() => _SessionScreenState();
@@ -29,6 +32,9 @@ class _SessionScreenState extends State<SessionScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.skateparkId != null) {
+      _selectedSkatepark = widget.skateparkId;
+    }
     _fetchSkateparks();
   }
 
@@ -71,7 +77,7 @@ class _SessionScreenState extends State<SessionScreen> {
 
   String _combineDateAndTime(DateTime date, TimeOfDay time) {
     final dt = DateTime(date.year, date.month, date.day, time.hour, time.minute);
-    final utcDateTime = dt.toUtc(); // Zet om naar UTC
+    final utcDateTime = dt.toUtc();
     return DateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS'Z'").format(utcDateTime);
   }
 
@@ -86,33 +92,12 @@ class _SessionScreenState extends State<SessionScreen> {
     final startTime = _combineDateAndTime(_selectedDate, _startTime);
     final endTime = _combineDateAndTime(_selectedDate, _endTime);
 
-    // if (startTime.compareTo(endTime) >= 0) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Eindtijd moet na de starttijd zijn!')),
-    //   );
-    //   return;
-    // }
-
     if (DateTime.now().compareTo(DateTime.parse(startTime)) >= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Starttijd moet in de toekomst zijn!')),
       );
       return;
     }
-
-    if (DateTime.now().compareTo(DateTime.parse(endTime)) >= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Eindtijd moet in de toekomst zijn!')),
-      );
-      return;
-    }
-
-    // if (DateTime.parse(endTime).difference(DateTime.parse(startTime)).inMinutes < 30) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Sessie moet minimaal 30 minuten duren!')),
-    //   );
-    //   return;
-    // }
 
     await _sesionService.createSession(startTime, endTime, _selectedSkatepark!);
 
@@ -126,7 +111,7 @@ class _SessionScreenState extends State<SessionScreen> {
       _selectedSkatepark = null;
     });
 
-     Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SessionListScreen()),
     );
@@ -134,18 +119,16 @@ class _SessionScreenState extends State<SessionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Nieuwe Sessie',
               style: TextStyle(
@@ -275,7 +258,7 @@ class _SessionScreenState extends State<SessionScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: FooterWidget(currentIndex: 3),
-    );
+      bottomNavigationBar: FooterWidget(currentIndex: 999),
+    ));
   }
 }

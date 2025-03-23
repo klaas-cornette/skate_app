@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/leaderboard/leaderboard_screen.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skate_community/services/trick_service.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class ChallengeScreen extends StatefulWidget {
   const ChallengeScreen({super.key});
@@ -42,8 +42,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
     });
   }
 
-  Future<void> toggleChallenge(
-      String challengeId, String trickName, int points) async {
+  Future<void> toggleChallenge(String challengeId, String trickName, int points) async {
     final challenge = await trickService.getActiveChallengById(challengeId);
 
     if (challenge['completed']) {
@@ -53,12 +52,11 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
     }
     await loadChallenges();
     setState(() {
-    _isLoading = false; // Stop loading
-  });
+      _isLoading = false; // Stop loading
+    });
   }
 
-  Future<void> addChallenge(
-      String challengeId, String trickName, int points) async {
+  Future<void> addChallenge(String challengeId, String trickName, int points) async {
     try {
       await trickService.addUserChallenge(challengeId, trickName, points);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -88,16 +86,13 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -138,8 +133,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                   child: ListTile(
                     title: Text(
                       trick['name'],
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text("Punten: ${trick['points']}"),
                     trailing: Icon(
@@ -148,14 +142,13 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                     ),
                     onTap: () {
                       int points = trick['points'].toInt();
-                      toggleChallenge(
-                          trick['trick_id'].toString(), trick['name'], points);
+                      toggleChallenge(trick['trick_id'].toString(), trick['name'], points);
                     },
                   ),
                 );
               },
             ),
       bottomNavigationBar: FooterWidget(currentIndex: 4),
-    );
+    ));
   }
 }

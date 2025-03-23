@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/services/leaderboard_service.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
-import 'package:skate_community/screens/widgets/leaderboard_tab_content.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/screens/widgets/leaderboard/leaderboard_tab_content.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -11,8 +12,7 @@ class LeaderboardScreen extends StatefulWidget {
   _LeaderboardScreenState createState() => _LeaderboardScreenState();
 }
 
-class _LeaderboardScreenState extends State<LeaderboardScreen>
-    with SingleTickerProviderStateMixin {
+class _LeaderboardScreenState extends State<LeaderboardScreen> with SingleTickerProviderStateMixin {
   final LeaderboardService _leaderboardService = LeaderboardService();
   late TabController _tabController;
   List<Map<String, dynamic>> _globalLeaderboard = [];
@@ -39,19 +39,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       final globalData = await _leaderboardService.getLeaderboard();
       final friendsData = await _leaderboardService.getFriendsLeaderboard();
       setState(() {
-        _globalLeaderboard = (globalData['leaderboard'] as List<dynamic>)
-            .map((e) => Map<String, dynamic>.from(e))
-            .toList();
-        _friendsLeaderboard = (friendsData['leaderboard'] as List<dynamic>)
-            .map((e) => Map<String, dynamic>.from(e))
-            .toList();
+        _globalLeaderboard =
+            (globalData['leaderboard'] as List<dynamic>).map((e) => Map<String, dynamic>.from(e)).toList();
+        _friendsLeaderboard =
+            (friendsData['leaderboard'] as List<dynamic>).map((e) => Map<String, dynamic>.from(e)).toList();
       });
     } catch (e) {
       setState(() {
         _error = e.toString();
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error: $_error')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $_error')));
     } finally {
       setState(() {
         _isLoading = false;
@@ -61,18 +58,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100.0),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+          decoration: BoxDecoration(
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Leaderboard',
               style: TextStyle(
@@ -115,7 +110,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
           ],
         ),
       ),
-      bottomNavigationBar: const FooterWidget(currentIndex: 1),
-    );
+      bottomNavigationBar: const FooterWidget(currentIndex: 999),
+    ));
   }
 }

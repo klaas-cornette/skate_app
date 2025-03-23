@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skate_community/screens/friends/add_friends_screen.dart';
-import 'package:skate_community/screens/widgets/background_wrapper.dart';
-import 'package:skate_community/screens/widgets/friend_list_widget.dart';
-import 'package:skate_community/screens/widgets/friend_requests_widget.dart';
+import 'package:skate_community/screens/widgets/main/background_wrapper.dart';
+import 'package:skate_community/screens/widgets/friend/friend_list_widget.dart';
+import 'package:skate_community/screens/widgets/friend/friend_requests_widget.dart';
 import 'package:skate_community/services/friend_service.dart';
-import 'package:skate_community/screens/widgets/footer_widget.dart';
+import 'package:skate_community/screens/widgets/main/footer_widget.dart';
+import 'package:skate_community/middleware/middleware.dart';
 
 class FriendsListScreen extends StatefulWidget {
   const FriendsListScreen({super.key});
@@ -15,7 +16,6 @@ class FriendsListScreen extends StatefulWidget {
 
 class _FriendsListScreenState extends State<FriendsListScreen> {
   final FriendsService _friendsService = FriendsService();
-  // final ChatService _chatService = ChatService();
   List<Map<String, dynamic>> _friendRequests = [];
   List<Map<String, dynamic>> _friends = [];
   bool _isLoading = false;
@@ -45,8 +45,13 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
       _isLoading = true;
     });
     try {
-      _friends = await _friendsService.getFriends();
-    } finally {
+      final friends = await _friendsService.getFriends();
+      setState(() {
+        _friends = friends;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error loading friends: $e');
       setState(() {
         _isLoading = false;
       });
@@ -69,46 +74,15 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
     _loadFriends();
   }
 
-  // Future<void> _findOrMakeChat(username, friendId) async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-
-  //   try {
-  //     final response = await _chatService.findOrMakeChat(friendId);
-  //     String chatPartnerName = username['username'];
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => ChatMessagesScreen(
-  //           chatId: response[0]['id'], // Zorg dat je het chatId doorgeeft
-  //           chatPartnerName: chatPartnerName, // Zorg dat je de naam doorgeeft
-  //         ),
-  //       ),
-  //     );
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Error: $e')),
-  //     );
-  //   } finally {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthMiddleware(
+        child: Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF0C1033), Color(0xFF9AC4F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: Color(0xFF0C1033),
           ),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -133,19 +107,15 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Vriendverzoeken
                 FriendRequestsWidget(
                   friendRequests: _friendRequests,
                   isLoading: _isLoading,
                   onAccept: _acceptFriendRequest,
                   onDecline: _declineFriendRequest,
                 ),
-                const SizedBox(height: 20),
-                // Vriendenlijst
                 FriendsListWidget(
                   friends: _friends,
                   isLoading: _isLoading,
-                  // onChat: _findOrMakeChat,
                   onDelete: _deleteFriend,
                 ),
               ],
@@ -165,9 +135,9 @@ class _FriendsListScreenState extends State<FriendsListScreen> {
         child: const Icon(
           Icons.person_add,
           color: Colors.white,
-          ),
+        ),
       ),
       bottomNavigationBar: FooterWidget(currentIndex: 1),
-    );
+    ));
   }
 }

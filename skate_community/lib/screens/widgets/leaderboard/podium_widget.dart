@@ -6,10 +6,9 @@ class PodiumWidget extends StatelessWidget {
   const PodiumWidget({super.key, required this.leaderboard});
 
   double _getStepHeightForIndex(int index) {
-    // Hoogtes voor de podiumstappen: 1e (midden), 2e (links) en 3e (rechts)
-    const double firstStepHeight = 130.0;
-    const double secondStepHeight = 100.0;
-    const double thirdStepHeight = 70.0;
+    const double firstStepHeight = 170.0;
+    const double secondStepHeight = 140.0;
+    const double thirdStepHeight = 110.0;
     switch (index) {
       case 0:
         return secondStepHeight;
@@ -25,20 +24,16 @@ class PodiumWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (leaderboard.length < 3) return const SizedBox.shrink();
-
-    // Haal de top 3 spelers op (aangenomen dat leaderboard reeds gesorteerd is)
     final topThree = leaderboard.take(3).toList();
-    // Herordenen: 2e, 1e en 3e plaats
     final podiumOrder = [topThree[1], topThree[0], topThree[2]];
-    const double stepWidth = 80.0;
-    const double avatarRadius = 45.0;
+    const double stepWidth = 100.0;
+    const double avatarRadius = 50.0;
 
     return SizedBox(
-      height: 210,
+      height: 220,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          // Achtergrond: podiumstappen met gouden gradient
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -86,8 +81,7 @@ class PodiumWidget extends StatelessWidget {
             children: List.generate(3, (index) {
               final entry = podiumOrder[index];
               final double stepHeight = _getStepHeightForIndex(index);
-              // Offset zodanig dat de avatar mooi boven de stap zweeft
-              final double avatarOffset = -(stepHeight - avatarRadius);
+              final double avatarOffset = -(stepHeight - avatarRadius - 30);
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -97,13 +91,14 @@ class PodiumWidget extends StatelessWidget {
                       radius: avatarRadius,
                       backgroundImage: entry['avatar_url'] != null
                           ? NetworkImage(entry['avatar_url'])
-                          : const AssetImage('assets/images/default_profile.png')
-                              as ImageProvider,
+                          : const AssetImage('assets/images/default_profile.png') as ImageProvider,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    entry['username'] ?? 'Onbekend',
+                    ((entry['username'] ?? 'Onbekend').toString().length > 10)
+                        ? '${(entry['username'] ?? 'Onbekend').toString().substring(0, 8)}...'
+                        : (entry['username'] ?? 'Onbekend').toString(),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
