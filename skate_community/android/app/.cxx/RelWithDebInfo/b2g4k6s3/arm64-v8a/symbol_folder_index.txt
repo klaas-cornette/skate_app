@@ -1,0 +1,1 @@
+C:\Users\klaas\Documents\skate_app\skate_community\build\app\intermediates\cxx\RelWithDebInfo\b2g4k6s3\obj\arm64-v8a

@@ -1,0 +1,2 @@
+C:/Users/klaas/Documents/skate_app/skate_community/android/app/.cxx/RelWithDebInfo/b2g4k6s3/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/klaas/Documents/skate_app/skate_community/android/app/.cxx/RelWithDebInfo/b2g4k6s3/armeabi-v7a/CMakeFiles/rebuild_cache.dir
